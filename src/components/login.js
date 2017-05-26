@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router';
+import { Control, Form, actions } from 'react-redux-form'
 
-export default class Login extends Component {
+export default class Login extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -10,13 +10,13 @@ export default class Login extends Component {
   render() {
     return (
       <div className="login">
-        <form className="login-form">
+        <Form model="login" className="login-form">
           <label htmlFor="login-email">email:</label>
-          <input id="login-email" ref={element => { this.loginEmail = element }} />
+          <Control.text model="login.username" id="login-email" />
           <label htmlFor="login-password">password:</label>
-          <input id="login-password" ref={element => { this.loginPassword = element }}/>
+          <Control.text model="login.password" id="login-password" />
           <button type="submit">login</button>
-        </form>
+        </Form>
         <div>
           <Link to={'/registration/'}>
               Register new account
