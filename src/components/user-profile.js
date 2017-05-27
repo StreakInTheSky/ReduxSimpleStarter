@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import * as actions from '../actions'
+import Gallery from './gallery'
 
 export class UserProfile extends React.Component {
   constructor(props){
@@ -14,20 +15,25 @@ export class UserProfile extends React.Component {
  }
 
   render() {
-    const user = this.props.user
+    const user = this.props.user;
+
+    const galleries = user.galleries.map((gallery, index) => {
+      return <Gallery key={index} gallery={gallery} />;
+    });
+
     return (
       <main className="content">
         <section className="user-info">
           <h2 className="username">{user.username}</h2>
           <div className="users-menu">
             <ul>
-              <li>Following</li>
-              <li>Followers</li>
-              <li>Favorites</li>
+              <li className="user-menu-item">Following: {user.following.length}</li>
+              <li className="user-menu-item">Followers: {user.followers.length}</li>
+              <li className="user-menu-item">Favorites</li>
             </ul>
           </div>
         </section>
-        {/* <Gallery gallery="user.galleries" /> */}
+        {galleries}
       </main>
     )
   }
