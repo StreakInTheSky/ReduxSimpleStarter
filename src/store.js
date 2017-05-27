@@ -1,22 +1,8 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { combineForms } from 'react-redux-form';
+import reducers from './reducers'
 
-const initialLoginState = {
-  email: '',
-  password: ''
-}
-
-const initialRegistrationState = {
-  username: '',
-  email: '',
-  password: '',
-  passwordConfirm: ''
-};
-
-const store = createStore(combineForms({
-  login: initialLoginState,
-  register: initialRegistrationState
-}), applyMiddleware(thunk));
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore)
+const store = createStoreWithMiddleware(reducers)
 
 export default store;
