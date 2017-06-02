@@ -30,20 +30,19 @@ export class UserList extends React.Component {
     })
   }
 
-
   render() {
 
     return (
-      <div className="user-list-overlay" style={styles.overlay}>
-        <div style={styles.box}>
+      <div className="user-list-overlay" style={styles.overlay} >
+        <div className="overlay-box" style={styles.box} >
           <div style={styles.header}>
             <h4>{this.props.params.userlist}</h4>
           </div>
           <div style={styles.content}>
             <ul style={styles.ul}>{this.renderUsers()}</ul>
           </div>
+          <div style={styles.closeButton} className="close-button" onClick={this.back} >close</div>
         </div>
-        <div style={styles.closeButton} className="close-button" onClick={this.back}>close</div>
       </div>
     )
   }
@@ -61,21 +60,22 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center'
   },
-  closeButton: {
-    position: 'fixed',
-    top: '5px',
-    right: '5px',
-    padding: '3px',
-    backgroundColor: "white"
-  },
   box: {
+    position: 'relative',
     width: '500px',
     height: '500px',
     backgroundColor: 'white'
   },
+  closeButton: {
+    position: 'absolute',
+    top: '-2em',
+    right: 0,
+    padding: '3px',
+    backgroundColor: "white",
+    cursor: 'pointer'
+  },
   header: {
-    padding: '10px',
-    backgroundColor: 'lightgrey'
+    padding: '10px'
   },
   content: {
     padding: '10px'
