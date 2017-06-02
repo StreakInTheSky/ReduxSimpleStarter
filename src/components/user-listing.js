@@ -13,7 +13,7 @@ export default function UserListing(props) {
   return (
       <li>
         <Link to={`../${props.username}`} onClick={goToLink}>{props.username}</Link>
-        <button style={styles.button} onClick={followUser}>follow</button>
+        <button className="follow-button" style={styles.button} onClick={followUser}>follow</button>
       </li>
   )
 }
