@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 
 import * as actions from '../actions'
+import ProfileMenu from './user-profile-menu'
 import Gallery from './gallery'
 
 export class UserProfile extends React.Component {
@@ -26,13 +27,7 @@ export class UserProfile extends React.Component {
       <main className="content">
         <section className="user-info">
           <h2 className="username">{user.username}</h2>
-          <div className="users-menu">
-            <ul>
-              <li className="user-menu-item"><Link to={`/${user.username}/following`}>Following: {user.following.length}</Link></li>
-              <li className="user-menu-item"><Link to={`/${user.username}/followers`}>Followers: {user.followers.length}</Link></li>
-              <li className="user-menu-item">Favorites</li>
-            </ul>
-          </div>
+          <ProfileMenu username={user.username} following={user.following} followers={user.followers} />
         </section>
         {galleries}
         {this.props.children}
