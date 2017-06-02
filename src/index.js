@@ -17,9 +17,9 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={App}>
         <IndexRoute component={Login} />
-        <Route path="/registration" component={UserRegistration} />
-        <Route path="/:username" component={UserProfile}>
-          <Route path="/:userlist" component={UserList} />
+        <Route path="registration" component={UserRegistration} />
+        <Route path=":username" component={UserProfile}>
+          <Route path=":userlist" component={UserList} />
         </Route>
       </Route>
     </Router>

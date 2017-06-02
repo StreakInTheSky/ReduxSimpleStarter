@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { Link } from 'react-router'
 
 import * as actions from '../actions'
 import Gallery from './gallery'
-import UserList from './userlist'
 
 export class UserProfile extends React.Component {
   constructor(props){
@@ -28,13 +28,14 @@ export class UserProfile extends React.Component {
           <h2 className="username">{user.username}</h2>
           <div className="users-menu">
             <ul>
-              <li className="user-menu-item">Following: {user.following.length} <UserList userlist={user.following} /></li>
-              <li className="user-menu-item">Followers: {user.followers.length} <UserList userlist={user.followers} /></li>
+              <li className="user-menu-item"><Link to={`/${user.username}/following`}>Following: {user.following.length}</Link></li>
+              <li className="user-menu-item"><Link to={`/${user.username}/followers`}>Followers: {user.followers.length}</Link></li>
               <li className="user-menu-item">Favorites</li>
             </ul>
           </div>
         </section>
         {galleries}
+        {this.props.children}
       </main>
     )
   }
