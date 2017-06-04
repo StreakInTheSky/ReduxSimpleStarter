@@ -20,13 +20,9 @@ export class UserList extends React.Component {
     this.props.history.goBack();
   }
 
-  goToLink(path){
-    this.props.history.push(path)
-  }
-
   renderUsers = () => {
     return this.props[this.props.params.userlist].map(user => {
-      return <UserListing username={user.username} key={user._id} followUser={this.followUser} goToLink={this.goToLink}/>
+      return <UserListing username={user.username} key={user._id} followUser={this.followUser} />
     })
   }
 

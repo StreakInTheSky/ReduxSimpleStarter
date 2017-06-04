@@ -6,13 +6,9 @@ export default function UserListing(props) {
     props.followUser(props.username)
   }
 
-  const goToLink = () => {
-    props.goToLink(`../${props.username}`)
-  }
-
   return (
       <li>
-        <Link to={`../${props.username}`} onClick={goToLink}>{props.username}</Link>
+        <Link to={`/${props.username}`} >{props.username}</Link>
         <button className="follow-button" style={styles.button} onClick={followUser}>follow</button>
       </li>
   )
