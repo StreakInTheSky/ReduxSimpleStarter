@@ -26,9 +26,9 @@ export class UserRegistration extends React.Component {
     }
 
     return (
-      <Form model="register" className="register" onSubmit={(info) => this.registerUser(info)} >
+      <Form model="forms.register" className="register" onSubmit={(info) => this.registerUser(info)} >
         <label htmlFor="register-username">username:</label>
-        <Control.text model="register.username" id="register-username" required
+        <Control.text model="forms.register.username" id="register-username" required
             validators={{
               maxLength: (val) => val.length <= 30
             }}
@@ -37,7 +37,7 @@ export class UserRegistration extends React.Component {
         <Errors
             style={errorStyles}
             className="errors"
-            model="register.username"
+            model="forms.register.username"
             show="touched"
             messages={{
               valueMissing: 'username is required',
@@ -46,11 +46,11 @@ export class UserRegistration extends React.Component {
           />
         <br />
         <label htmlFor="register-email">email:</label>
-        <Control type="email" model="register.email" id="register-email" required />
+        <Control type="email" model="forms.register.email" id="register-email" required />
         <Errors
             style={errorStyles}
             className="errors"
-            model="register.email"
+            model="forms.register.email"
             show="touched"
             messages={{
               valueMissing: 'email is required',
@@ -59,7 +59,7 @@ export class UserRegistration extends React.Component {
           />
         <br />
         <label htmlFor="register-password">password:</label>
-        <Control type="password" model="register.password" id="register-password" required
+        <Control type="password" model="forms.register.password" id="register-password" required
           validators={{
             minLength: (val) => val.length >= 8
           }}
@@ -68,7 +68,7 @@ export class UserRegistration extends React.Component {
         <Errors
           style={errorStyles}
           className="errors"
-          model="register.password"
+          model="forms.register.password"
           show="touched"
           messages={{
             minLength: "must be atleast 8 characters"
@@ -76,7 +76,7 @@ export class UserRegistration extends React.Component {
           />
         <br />
         <label htmlFor="register-password-confirm">re-type password:</label>
-        <Control type="password" model="register.passwordConfirm" id="register-password-confirm" required
+        <Control type="password" model="forms.register.passwordConfirm" id="register-password-confirm" required
           //   validators={{
           //     passwordsMatch: checkPasswordsMatch
           //   }}
@@ -99,8 +99,8 @@ export class UserRegistration extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  password: state.register.password,
-  passwordConfirm: state.register.passwordConfirm
+  password: state.forms.register.password,
+  passwordConfirm: state.forms.register.passwordConfirm
 });
 
 export default connect(mapStateToProps)(UserRegistration);

@@ -10,11 +10,11 @@ export default class Login extends React.Component {
   render() {
     return (
       <div className="login">
-        <Form model="login" className="login-form">
+        <Form model="forms.login" className="login-form">
           <label htmlFor="login-email">email:</label>
-          <Control.text model="login.username" id="login-email" />
+          <Control.text model="forms.login.username" id="login-email" />
           <label htmlFor="login-password">password:</label>
-          <Control.text model="login.password" id="login-password" />
+          <Control.text model="forms.login.password" id="login-password" />
           <button type="submit">login</button>
         </Form>
         <div>
