@@ -16,10 +16,10 @@ const initialRegistrationState = {
 
 const rootReducer = combineReducers({
   user: UserReducer,
-  form: combineForms({
+  forms: combineForms({
     login: initialLoginState,
     register: initialRegistrationState
-  }, 'form')
+  }, 'forms')
 });
 
 export default rootReducer;
