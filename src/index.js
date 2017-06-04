@@ -10,6 +10,7 @@ import Login from './components/login'
 import UserRegistration from './components/user-registration'
 import UserProfile from './components/user-profile'
 import UserList from './components/userlist'
+import CurateContainer from './components/curate-container'
 
 
 ReactDOM.render(
@@ -18,6 +19,7 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={Login} />
         <Route path="registration" component={UserRegistration} />
+        <Route path="curate" component={CurateContainer} />
         <Route path=":username" component={UserProfile}>
           <Route path=":userlist" component={UserList} />
         </Route>
