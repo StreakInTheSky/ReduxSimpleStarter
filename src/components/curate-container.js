@@ -1,6 +1,7 @@
 import React from 'react'
 
 import ImageGallery from './curate-image-gallery'
+import InstagramImages from './curate-view-instagram-images'
 
 export default class CurateContainer extends React.Component {
   constructor(props) {
@@ -13,20 +14,29 @@ export default class CurateContainer extends React.Component {
       fetchedFromInstagram: []
     }
 
+    this.keyHandler = this.keyHandler.bind(this)
     this.fetchImageFromInstagram = this.fetchImageFromInstagram.bind(this)
     this.fetchImageFromFile = this.fetchImageFromFile.bind(this)
     this.fetchImageFromUrl = this.fetchImageFromUrl.bind(this)
   }
 
-  fetchImageFromInstagram(event) {
+  keyHandler(event, callback) {
+    if (event.keyCode === 13) {
+      callback()
+    }
+  }
+
+  fetchImageFromInstagram() {
+    this.setState({ fetchedFromInstagram: [] })
+
+    console.log('...loading images')
+
     const xhr = new XMLHttpRequest();
     xhr.onloadend = () => {
-      console.log(xhr.response)
-      this.setState({ fetchedFromInstagram: [xhr.response]})
-      // console.log(this.setState.fetchedFromInstagram)
+      this.setState({ fetchedFromInstagram: xhr.response})
     };
     xhr.open('GET', `http://localhost:3000/api/fetch/instagram?username=${this.fetchInstagramInput.value}`);
-    // xhr.responseType = 'blob';
+    xhr.responseType = 'json';
     xhr.send();
   }
 
@@ -53,6 +63,7 @@ export default class CurateContainer extends React.Component {
       const reader = new FileReader();
       reader.onloadend = () => {
         this.setState({ fetchedImages: [...this.state.fetchedImages, reader.result]})
+        this.fetchImageInput.value = ''
       };
       reader.readAsDataURL(xhr.response);
     };
@@ -61,21 +72,19 @@ export default class CurateContainer extends React.Component {
     xhr.send();
   }
 
-  componentDidUpdate() {
-  }
-
   render() {
     return (
       <div>
         <h2>Curate</h2>
         <p>Search Instagram, upload, or enter the url of the images you want to add to a new gallery.</p>
         <div>
-          <label>Enter Instagram Username<input type="text" ref={(input) => { this.fetchInstagramInput = input; }} /></label>
-          <button onClick={this.fetchImageFromInstagram}>View Images</button>
+          <label>Enter Instagram Username<input type="text" onKeyUp={event => this.keyHandler(event, this.fetchImageFromInstagram)} ref={(input) => { this.fetchInstagramInput = input; }} /></label>
+          <button type="submit" onClick={this.fetchImageFromInstagram}>View Images</button>
+          <InstagramImages urls={this.state.fetchedFromInstagram} />
         </div>
         <div>
-          <label>Image Url<input type="text" ref={(input) => { this.fetchImageInput = input; }}/></label>
-          <button onClick={this.fetchImageFromUrl}>Fetch Image</button>
+          <label>Image Url<input type="url" onKeyUp={event => this.keyHandler(event, this.fetchImageFromUrl)} ref={(input) => { this.fetchImageInput = input; }}/></label>
+          <button type="submit" onClick={this.fetchImageFromUrl}>Fetch Image</button>
         </div>
         <div>
           <label htmlFor="upload">Upload</label>
