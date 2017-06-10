@@ -7,15 +7,43 @@ export default class CurateContainer extends React.Component {
     super(props)
 
     this.fetchImageInput = null
+    this.fetchInstagramInput = null
     this.state = {
-      fetchedImages: []
+      fetchedImages: [],
+      fetchedFromInstagram: []
     }
 
-    this.uploadImage = this.uploadImage.bind(this)
+    this.fetchImageFromInstagram = this.fetchImageFromInstagram.bind(this)
+    this.fetchImageFromFile = this.fetchImageFromFile.bind(this)
     this.fetchImageFromUrl = this.fetchImageFromUrl.bind(this)
   }
 
-  uploadImage() {}
+  fetchImageFromInstagram(event) {
+    const xhr = new XMLHttpRequest();
+    xhr.onloadend = () => {
+      console.log(xhr.response)
+      this.setState({ fetchedFromInstagram: [xhr.response]})
+      // console.log(this.setState.fetchedFromInstagram)
+    };
+    xhr.open('GET', `http://localhost:3000/api/fetch/instagram?username=${this.fetchInstagramInput.value}`);
+    // xhr.responseType = 'blob';
+    xhr.send();
+  }
+
+  fetchImageFromFile(event) {
+    const files = event.target.files
+    let promises = []
+    for (let i = 0; i < files.length; i++) {
+      promises.push(new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        const file = files[i]
+        reader.onloadend = () => resolve(reader.result)
+        reader.onerror = (error) => reject(error)
+        reader.readAsDataURL(file)
+      }))
+    }
+    Promise.all(promises).then(images => this.setState({ fetchedImages: [...this.state.fetchedImages, ...images]}))
+  }
 
   fetchImageFromUrl() {
     // regex for valid url here
@@ -24,9 +52,7 @@ export default class CurateContainer extends React.Component {
     xhr.onload = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
-        const updatedState = this.state;
-        updatedState.fetchedImages.push(reader.result)
-        this.setState(updatedState)
+        this.setState({ fetchedImages: [...this.state.fetchedImages, reader.result]})
       };
       reader.readAsDataURL(xhr.response);
     };
@@ -44,17 +70,25 @@ export default class CurateContainer extends React.Component {
         <h2>Curate</h2>
         <p>Search Instagram, upload, or enter the url of the images you want to add to a new gallery.</p>
         <div>
-          <label>Search<input type="text"/></label>
+          <label>Enter Instagram Username<input type="text" ref={(input) => { this.fetchInstagramInput = input; }} /></label>
+          <button onClick={this.fetchImageFromInstagram}>View Images</button>
         </div>
         <div>
           <label>Image Url<input type="text" ref={(input) => { this.fetchImageInput = input; }}/></label>
           <button onClick={this.fetchImageFromUrl}>Fetch Image</button>
         </div>
         <div>
-          <button>Upload</button>
+          <label htmlFor="upload">Upload</label>
+          <input id="upload" style={styles.upload} type="file" onChange={this.fetchImageFromFile} accept="image/*" multiple />
         </div>
         <ImageGallery images={this.state.fetchedImages} />
       </div>
     )
+  }
+}
+
+const styles = {
+  upload: {
+    display: 'none'
   }
 }
