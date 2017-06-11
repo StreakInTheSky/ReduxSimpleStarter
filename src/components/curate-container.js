@@ -11,10 +11,12 @@ export default class CurateContainer extends React.Component {
     this.fetchInstagramInput = null
     this.state = {
       fetchedImages: [],
-      fetchedFromInstagram: []
+      fetchedFromInstagram: [],
+      fetchInstagramBy: 'Username'
     }
 
     this.keyHandler = this.keyHandler.bind(this)
+    this.switchFetchInstagramBy = this.switchFetchInstagramBy.bind(this)
     this.fetchImageFromInstagram = this.fetchImageFromInstagram.bind(this)
     this.fetchImageFromFile = this.fetchImageFromFile.bind(this)
     this.fetchImageFromUrl = this.fetchImageFromUrl.bind(this)
@@ -26,16 +28,35 @@ export default class CurateContainer extends React.Component {
     }
   }
 
+  switchFetchInstagramBy() {
+    if (this.state.fetchInstagramBy === 'Username') {
+      this.setState({ fetchInstagramBy: 'Hashtag'})
+    } else {
+      this.setState({ fetchInstagramBy: 'Username'})
+    }
+
+    console.log(`set to ${this.state.fetchInstagramBy}`)
+  }
+
   fetchImageFromInstagram() {
     this.setState({ fetchedFromInstagram: [] })
+
+    let url = 'http://localhost:3000/api/fetch/instagram';
+
+    if (this.state.fetchInstagramBy === 'Username') {
+      url = url + `?username=${this.fetchInstagramInput.value}`
+    } else if (this.state.fetchInstagramBy === 'Hashtag') {
+      url = url + `?tag=${this.fetchInstagramInput.value}`
+    }
 
     console.log('...loading images')
 
     const xhr = new XMLHttpRequest();
     xhr.onloadend = () => {
+      console.log('images loaded.')
       this.setState({ fetchedFromInstagram: xhr.response})
     };
-    xhr.open('GET', `http://localhost:3000/api/fetch/instagram?username=${this.fetchInstagramInput.value}`);
+    xhr.open('GET', url);
     xhr.responseType = 'json';
     xhr.send();
   }
@@ -78,12 +99,16 @@ export default class CurateContainer extends React.Component {
         <h2>Curate</h2>
         <p>Search Instagram, upload, or enter the url of the images you want to add to a new gallery.</p>
         <div>
-          <label>Enter Instagram Username<input type="text" onKeyUp={event => this.keyHandler(event, this.fetchImageFromInstagram)} ref={(input) => { this.fetchInstagramInput = input; }} /></label>
+          <label>Enter Instagram <span className="fetch-instagram-by" style={styles.searchBy}onClick={this.switchFetchInstagramBy}>{this.state.fetchInstagramBy}</span>
+            <input type="text" onKeyUp={event => this.keyHandler(event, this.fetchImageFromInstagram)} ref={(input) => { this.fetchInstagramInput = input; }} />
+          </label>
           <button type="submit" onClick={this.fetchImageFromInstagram}>View Images</button>
           <InstagramImages urls={this.state.fetchedFromInstagram} />
         </div>
         <div>
-          <label>Image Url<input type="url" onKeyUp={event => this.keyHandler(event, this.fetchImageFromUrl)} ref={(input) => { this.fetchImageInput = input; }}/></label>
+          <label>Image Url
+            <input type="url" onKeyUp={event => this.keyHandler(event, this.fetchImageFromUrl)} ref={(input) => { this.fetchImageInput = input; }}/>
+          </label>
           <button type="submit" onClick={this.fetchImageFromUrl}>Fetch Image</button>
         </div>
         <div>
@@ -99,5 +124,10 @@ export default class CurateContainer extends React.Component {
 const styles = {
   upload: {
     display: 'none'
+  },
+  searchBy: {
+    backgroundColor: 'black',
+    color: 'white',
+    textDecoration: 'underline'
   }
 }
