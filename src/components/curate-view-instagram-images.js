@@ -8,34 +8,18 @@ export default function InstagramImages(props) {
   })
 
   return (
-    <div>{image}</div>
-    // <div className="overlay" style={styles.overlay}>
-    //   <div className="modal-box" style={styles.box}>
-    //     <div style={styles.content}>
-    //       {image}
-    //     </div>
-    //     <div style={styles.closeButton} className="close-button">close</div>
-    //   </div>
-    // </div>
+    <div className="instagram-box">
+      <button className="closeButton">Close</button>
+      {image}
+    </div>
+
   )
 }
 
 const styles = {
-  overlay: {
-    position: 'fixed',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    backgroundColor: 'rgba(0,0,0,0.7)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  box: {
+  container: {
     position: 'relative',
-    width: '90%',
-    height: '90%',
+    display: 'flex',
     backgroundColor: 'white',
     overflowY: 'scroll'
   },
@@ -47,8 +31,4 @@ const styles = {
     backgroundColor: "white",
     cursor: 'pointer'
   },
-  content: {
-    padding: '10px'
-  },
-
 }
