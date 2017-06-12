@@ -8,7 +8,6 @@ export default function Thumbnail(props) {
 
 const styles = {
   imageContainer: {
-    display: 'inline-block',
     position: 'relative',
     margin: '0 5px',
     width: '100px',

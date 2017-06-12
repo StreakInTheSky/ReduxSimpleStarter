@@ -10,7 +10,7 @@ import Login from './components/login'
 import UserRegistration from './components/user-registration'
 import UserProfile from './components/user-profile'
 import UserList from './components/userlist'
-import CurateContainer from './components/curate-container'
+import CurateContainer from './components/curate'
 
 
 ReactDOM.render(

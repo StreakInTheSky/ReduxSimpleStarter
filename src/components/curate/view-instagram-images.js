@@ -1,16 +1,16 @@
 import React from 'react'
 
-import Thumbnail from './curate-thumbnail'
+import Thumbnail from './thumbnail'
 
 export default function InstagramImages(props) {
-  const image = props.urls.map((image, index) => {
+  const images = props.urls.map((image, index) => {
     return <Thumbnail src={image} key={index} />
   })
 
   return (
-    <div className="instagram-box">
-      <button className="closeButton">Close</button>
-      {image}
+    <div className="instagram-box" style={styles.container}>
+      <button style={styles.closeButton}>Close</button>
+      {images}
     </div>
 
   )
@@ -20,6 +20,7 @@ const styles = {
   container: {
     position: 'relative',
     display: 'flex',
+    maxHeight: '500px',
     backgroundColor: 'white',
     overflowY: 'scroll'
   },

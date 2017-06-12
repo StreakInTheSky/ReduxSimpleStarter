@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Thumbnail from './curate-thumbnail'
+import Thumbnail from './thumbnail'
 
 export default function ImageGallery(props) {
   const image = props.images.map((image, index) => {
