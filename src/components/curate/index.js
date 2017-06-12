@@ -36,14 +36,18 @@ export default class CurateContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Curate</h2>
-        <p>Search Instagram, upload, or enter the url of the images you want to add to a new gallery.</p>
-        <CurateInstagram keyHandler={this.keyHandler} addImages={this.addFetchedImages} />
-        <CurateUrl keyHandler={this.keyHandler} addImages={this.addFetchedImages} />
-        <CurateUpload addImages={this.addFetchedImages} />
-        <ImageGallery images={this.state.addedImages} />
-      </div>
+      <main>
+        <header>
+          <h2>Curate</h2>
+          <p>Search Instagram, upload, or enter the url of the images you want to add to a new gallery.</p>
+        </header>
+        <section>          
+          <CurateInstagram keyHandler={this.keyHandler} addImages={this.addFetchedImages} />
+          <CurateUrl keyHandler={this.keyHandler} addImages={this.addFetchedImages} />
+          <CurateUpload addImages={this.addFetchedImages} />
+          <ImageGallery images={this.state.addedImages} />
+        </section>
+      </main>
     )
   }
 }
