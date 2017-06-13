@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Control, Form, Errors, model } from 'react-redux-form';
 
-import * as actions from '../actions';
+import * as actions from '../actions/user';
 
 export class UserRegistration extends React.Component {
   // checkPasswordsMatch() {

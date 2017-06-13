@@ -16,9 +16,14 @@ export class UserList extends React.Component {
     console.log(`followed ${user}`)
   }
 
-  back(){
-    this.props.history.goBack();
+  back(event){
+    console.log(event.target)
+    console.log(this.box.childNodes)
+    if (!(event.target === this.box.childNodes)) {
+      this.props.history.goBack()
+    }
   }
+
 
   renderUsers = () => {
     return this.props[this.props.params.userlist].map(user => {
@@ -29,15 +34,15 @@ export class UserList extends React.Component {
   render() {
 
     return (
-      <div className="user-list-overlay" style={styles.overlay} >
-        <div className="overlay-box" style={styles.box} >
+      <div className="overlay" style={styles.overlay} onClick={this.back}>
+        <div className="modal-box" style={styles.box} ref={box => {this.box = box}}>
           <div style={styles.header}>
             <h4>{this.props.params.userlist}</h4>
           </div>
           <div style={styles.content}>
             <ul style={styles.ul}>{this.renderUsers()}</ul>
           </div>
-          <div style={styles.closeButton} className="close-button" onClick={this.back} >close</div>
+          <div style={styles.closeButton} className="close-button" onClick={this.back}>close</div>
         </div>
       </div>
     )

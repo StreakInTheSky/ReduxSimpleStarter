@@ -1,7 +1,7 @@
 import {
   FETCH_USER_INFO_SUCCESS,
   FETCH_USER_INFO_ERROR
-} from '../actions'
+} from '../actions/user'
 
 const initialState = {
   favorites: [],

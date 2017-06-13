@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 
-import * as actions from '../actions'
+import * as actions from '../actions/user'
 import ProfileMenu from './user-profile-menu'
 import Gallery from './gallery'
 

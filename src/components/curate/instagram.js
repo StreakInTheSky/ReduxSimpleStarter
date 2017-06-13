@@ -12,6 +12,7 @@ export default class CurateInstagram extends React.Component {
       fetchedFromInstagram: [],
       fetchInstagramBy: 'Username',
       isFetchingImages: false,
+      imagesLoaded: false,
       imagesToAdd: []
     }
 
@@ -22,10 +23,8 @@ export default class CurateInstagram extends React.Component {
     this.fetchImagesFromInstagram = this.fetchImagesFromInstagram.bind(this)
     this.chooseFetchedImages = this.chooseFetchedImages.bind(this)
     this.addFetchedImages = this.addFetchedImages.bind(this)
-  }
-
-  componentWillUpdate() {
-    this.changeFetchingMessage()
+    this.renderMessages = this.renderMessages.bind(this)
+    this.renderGallery = this.renderGallery.bind(this)
   }
 
   switchFetchInstagramBy() {
@@ -57,12 +56,13 @@ export default class CurateInstagram extends React.Component {
       url = url + `?tag=${this.fetchInstagramInput.value}`
     }
 
-    console.log('...loading images')
-
     const xhr = new XMLHttpRequest();
     xhr.onloadend = () => {
-      console.log('images loaded.')
-      this.setState({ fetchedFromInstagram: xhr.response, isFetchingImages: false })
+      this.setState({
+        fetchedFromInstagram: xhr.response,
+        isFetchingImages: false,
+        imagesLoaded: true,
+      })
     };
     xhr.open('GET', url);
     xhr.responseType = 'json';
@@ -80,8 +80,8 @@ export default class CurateInstagram extends React.Component {
       const xhr = new XMLHttpRequest();
       xhr.onload = () => {
         this.props.addImages(xhr.response)
-        this.setState(this.defaultState)
         this.fetchInstagramInput.value = ''
+        this.setState(this.defaultState)
       }
       xhr.open('GET', `http://localhost:3000/api/fetch/image-url?imageUrl=${image}`);
       xhr.responseType = 'blob';
@@ -89,20 +89,38 @@ export default class CurateInstagram extends React.Component {
     })
   }
 
-  render() {
+  renderMessages() {
+    this.changeFetchingMessage()
 
+    if (this.state.isFetchingImages) {
+      return (<div style={styles.inputItems}>
+        <p style={styles.fetchingMessage}>{this.fetchingMessage}</p>
+      </div>
+    )} else {
+      return null
+    }
+  }
+
+  renderGallery() {
+    if (this.state.imagesLoaded) {
+      return <InstagramImages urls={this.state.fetchedFromInstagram} chooseImages={this.chooseFetchedImages} addImages={this.addFetchedImages}/>
+    }
+    else {
+      return null
+    }
+  }
+
+  render() {
+    const loadingMessage = this.renderMessages()
+    const instagramGallery = this.renderGallery()
 
     return (
       <form id="fetchImageFromInstagram" onSubmit={this.fetchImagesFromInstagram}>
         <label>Enter Instagram <span className="fetch-instagram-by" style={styles.searchBy} onClick={this.switchFetchInstagramBy} >{this.state.fetchInstagramBy}</span></label>
         <input type="text" ref={(input) => { this.fetchInstagramInput = input; }} required/>
         <button type="submit">View Images</button>
-        <div style={styles.inputItems}>
-          <p style={styles.fetchingMessage}>{this.fetchingMessage}</p>
-          {/* <span ref={(x) => { this.closeButton = x }}>x</span> */}
-        </div>
-        <InstagramImages urls={this.state.fetchedFromInstagram} chooseImages={this.chooseFetchedImages}/>
-        <button type="button" onClick={this.addFetchedImages}>Add Images</button>
+        {loadingMessage}
+        {instagramGallery}
       </form>
     )
   }

@@ -22,20 +22,8 @@ export const fetchUserInfo = (username) => dispatch => {
 
 export const registerUser = userInfo => dispatch => {
   const url = `http://localhost:3000/api/user`;
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userInfo)
-  }
-  return fetch(url, options).then(response => {
-    if (!response.ok) {
-      const error = new Error(response.statusText)
-      error.response = response
-      throw error;
-    }
-  })
+
+  axios.post(url, { data: userInfo })
   .then(() => console.log("Registered the User"))
   .catch(error => console.error(error));
 }
