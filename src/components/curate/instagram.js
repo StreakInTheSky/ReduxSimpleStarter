@@ -1,6 +1,7 @@
 import React from 'react'
 
 import InstagramImages from './view-instagram-images'
+import * as actions from '../../actions/curate'
 
 export default class CurateInstagram extends React.Component {
   constructor(props) {
@@ -75,18 +76,8 @@ export default class CurateInstagram extends React.Component {
   }
 
   addFetchedImages() {
-    const images = this.state.imagesToAdd
-    images.forEach(image => {
-      const xhr = new XMLHttpRequest();
-      xhr.onload = () => {
-        this.props.addImages(xhr.response)
-        this.fetchInstagramInput.value = ''
-        this.setState(this.defaultState)
-      }
-      xhr.open('GET', `http://localhost:3000/api/fetch/image-url?imageUrl=${image}`);
-      xhr.responseType = 'blob';
-      xhr.send();
-    })
+    this.state.imagesToAdd.forEach(imageUrl => this.props.fetchImages(imageUrl))
+
   }
 
   renderMessages() {

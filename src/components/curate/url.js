@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class CurateContainer extends React.Component {
+export default class CurateUrl extends React.Component {
   constructor(props) {
     super(props)
 
@@ -12,15 +12,7 @@ export default class CurateContainer extends React.Component {
   fetchImageFromUrl(event) {
     event.preventDefault()
     // regex for valid url here
-
-    const xhr = new XMLHttpRequest();
-    xhr.onload = () => {
-      this.props.addImages(xhr.response)
-      this.fetchImageInput.value = ''
-    }
-    xhr.open('GET', `http://localhost:3000/api/fetch/image-url?imageUrl=${this.fetchImageInput.value}`);
-    xhr.responseType = 'blob';
-    xhr.send();
+    this.props.fetchImages(this.fetchImageInput.value)
   }
 
   render() {
@@ -33,5 +25,3 @@ export default class CurateContainer extends React.Component {
     )
   }
 }
-
-// onKeyUp={event => this.props.keyHandler(event, this.fetchImageFromUrl)}
