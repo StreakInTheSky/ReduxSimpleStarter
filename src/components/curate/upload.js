@@ -12,8 +12,8 @@ export default function CurateUpload(props) {
   }
 
   return (
-    <form id="uploadImage">
-      <label htmlFor="upload"><span>Upload</span></label>
+    <form id="uploadImage" className="curate-forms">
+      <label htmlFor="upload" className="mock-button" ><span>Upload</span></label>
       <input id="upload" style={styles.upload} type="file" onChange={uploadImages} accept="image/*" multiple />
     </form>
     )

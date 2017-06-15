@@ -17,7 +17,7 @@ export default class CurateUrl extends React.Component {
 
   render() {
     return (
-      <form id="fetchImageFromUrl" onSubmit={this.fetchImageFromUrl}>
+      <form id="fetchImageFromUrl" className="curate-forms" onSubmit={this.fetchImageFromUrl}>
         <label>Image Url</label>
         <input type="url" ref={(input) => { this.fetchImageInput = input; }} required/>
         <button type="submit">Fetch Image</button>

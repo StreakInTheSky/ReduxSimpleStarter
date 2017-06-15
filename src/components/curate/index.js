@@ -29,16 +29,17 @@ export class CurateContainer extends React.Component {
   render() {
 
     return (
-      <main>
-        <header>
+      <main className="curate-main-container">
+        <header className="main-header">
           <h2>Curate</h2>
           <p>Search Instagram, upload, or enter the url of the images you want to add to a new gallery.</p>
         </header>
-        <section>
+        <section className="main-content">
           <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/>
           <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
           <CurateUpload dispatch={this.props.dispatch} />
           <ImageGallery images={this.props.addedImages} />
+          <button className="next-page" type="button" disabled>Gallery Details</button>
         </section>
       </main>
     )

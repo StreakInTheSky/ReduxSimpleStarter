@@ -26,11 +26,12 @@ export default class CurateInstagram extends React.Component {
     this.addFetchedImages = this.addFetchedImages.bind(this)
     this.renderMessages = this.renderMessages.bind(this)
     this.renderGallery = this.renderGallery.bind(this)
+    this.closeGallery = this.closeGallery.bind(this)
   }
 
   switchFetchInstagramBy() {
     if (this.state.fetchInstagramBy === 'Username') {
-      this.setState({ fetchInstagramBy: 'Hashtag'})
+      this.setState({ fetchInstagramBy: 'Hashtag '})
     } else {
       this.setState({ fetchInstagramBy: 'Username'})
     }
@@ -77,16 +78,14 @@ export default class CurateInstagram extends React.Component {
 
   addFetchedImages() {
     this.state.imagesToAdd.forEach(imageUrl => this.props.fetchImages(imageUrl))
-
   }
 
   renderMessages() {
     this.changeFetchingMessage()
 
     if (this.state.isFetchingImages) {
-      return (<div style={styles.inputItems}>
+      return (
         <p style={styles.fetchingMessage}>{this.fetchingMessage}</p>
-      </div>
     )} else {
       return null
     }
@@ -94,11 +93,15 @@ export default class CurateInstagram extends React.Component {
 
   renderGallery() {
     if (this.state.imagesLoaded) {
-      return <InstagramImages urls={this.state.fetchedFromInstagram} chooseImages={this.chooseFetchedImages} addImages={this.addFetchedImages}/>
+      return <InstagramImages urls={this.state.fetchedFromInstagram} chooseImages={this.chooseFetchedImages} addImages={this.addFetchedImages} close={this.closeGallery} />
     }
     else {
       return null
     }
+  }
+
+  closeGallery() {
+    this.setState({ imagesLoaded: false })
   }
 
   render() {
@@ -106,11 +109,13 @@ export default class CurateInstagram extends React.Component {
     const instagramGallery = this.renderGallery()
 
     return (
-      <form id="fetchImageFromInstagram" onSubmit={this.fetchImagesFromInstagram}>
+      <form id="fetchImageFromInstagram" className="curate-forms" onSubmit={this.fetchImagesFromInstagram}>
         <label>Enter Instagram <span className="fetch-instagram-by" style={styles.searchBy} onClick={this.switchFetchInstagramBy} >{this.state.fetchInstagramBy}</span></label>
-        <input type="text" ref={(input) => { this.fetchInstagramInput = input; }} required/>
+        <div className="input-group" style={styles.inputGroup}>
+          <input type="text" ref={(input) => { this.fetchInstagramInput = input; }} required/>
+          {loadingMessage}
+        </div>
         <button type="submit">View Images</button>
-        {loadingMessage}
         {instagramGallery}
       </form>
     )
@@ -123,15 +128,15 @@ const styles = {
     color: 'white',
     textDecoration: 'underline'
   },
-  inputItems: {
-    position: 'relative',
-    top: '-2em',
-    height: 0
+  inputGroup: {
+    display: 'inline-block',
+    position: 'relative'
   },
   fetchingMessage: {
     position: 'absolute',
     textAlign: 'right',
-    right: 170,
+    top: '-0.75em',
+    right: 7,
     color: 'gray'
   }
 }

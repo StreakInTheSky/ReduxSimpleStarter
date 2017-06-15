@@ -9,6 +9,7 @@ export default function InstagramImages(props) {
 
   return (
     <div className="instagram-box" style={styles.box} >
+      <div className="close" style={styles.close} onClick={props.close}>&#10006;</div>
       <header>
         <p>Choose the images you want to add to your gallery: </p>
       </header>
@@ -25,12 +26,21 @@ export default function InstagramImages(props) {
 
 const styles = {
   box: {
+    position: 'relative',
     border: '1px solid lightgray',
     padding: '5px 10px'
+  },
+  close: {
+    position: 'absolute',
+    right: 5,
+    cursor: 'pointer',
+    color: 'gray',
+    fontSize: '20px'
   },
   container: {
     display: 'flex',
     flexWrap: 'wrap',
+    width: '100%',
     maxHeight: '500px',
     backgroundColor: 'white',
     overflowY: 'scroll'

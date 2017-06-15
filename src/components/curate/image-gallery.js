@@ -8,6 +8,9 @@ export default function ImageGallery(props) {
   })
 
   return (
-    <div>{images}</div>
+    <div>
+      <h5>Gallery Images:</h5>
+      {images}
+    </div>
   )
 }
