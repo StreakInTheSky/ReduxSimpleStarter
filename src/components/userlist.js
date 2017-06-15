@@ -34,7 +34,8 @@ export class UserList extends React.Component {
   render() {
 
     return (
-      <div className="overlay" style={styles.overlay} onClick={this.back}>
+      <div className="modal-container" style={styles.container}>
+        <div className="screen-overlay" style={styles.overlay} onClick={this.back} />
         <div className="modal-box" style={styles.box} ref={box => {this.box = box}}>
           <div style={styles.header}>
             <h4>{this.props.params.userlist}</h4>
@@ -50,16 +51,27 @@ export class UserList extends React.Component {
 }
 
 const styles = {
+  container: {
+    position: 'fixed',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   overlay: {
     position: 'fixed',
     top: 0,
     right: 0,
     bottom: 0,
     left: 0,
+    width: '100%',
+    height: '100%',
     backgroundColor: 'rgba(0,0,0,0.7)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   box: {
     position: 'relative',
