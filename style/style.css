@@ -56,7 +56,7 @@ button.next-page {
   width: 15%;
   padding-bottom: 14.5%;
   box-sizing: border-box;
-  border: 2px solid white;
+  border: 2px solid lightgrey;
 }
 
 .selected {

@@ -8,10 +8,12 @@ export default function Thumbnail(props) {
   }
 
   return (
-    <div className="thumbnail-container" style={styles.imageContainer} >
-      <span className="image-delete" onClick={deleteImage}>x</span>
-      <img className="thumbnail" src={props.src} style={styles.image} />
-    </div>
+
+      <div className="thumbnail-container" style={styles.imageContainer} >
+        <span className="image-delete" style={styles.delete} onClick={deleteImage}>&#10005;</span>
+        <img className="thumbnail" src={props.src} style={styles.image}  />
+      </div>
+
   )
 }
 
@@ -21,7 +23,12 @@ const styles = {
     position: 'relative',
     minWidth: 100,
     minHeight: 100,
-    overflow: 'hidden'
+  },
+  delete: {
+    display: 'inline-block',
+    position: 'absolute',
+    top: '-9px',
+    right: '-6px'
   },
   image: {
     position: 'absolute',
