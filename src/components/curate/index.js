@@ -13,6 +13,7 @@ export class CurateContainer extends React.Component {
 
     this.keyHandler = this.keyHandler.bind(this)
     this.fetchImages = this.fetchImages.bind(this)
+    this.deleteImage = this.deleteImage.bind(this)
   }
 
 
@@ -24,6 +25,10 @@ export class CurateContainer extends React.Component {
 
   fetchImages(imageUrl) {
     this.props.dispatch(actions.fetchImage(imageUrl));
+  }
+
+  deleteImage(imageIndex) {
+    this.props.dispatch(actions.deleteThumbnail(imageIndex));
   }
 
   render() {
@@ -38,8 +43,8 @@ export class CurateContainer extends React.Component {
           <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/>
           <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
           <CurateUpload dispatch={this.props.dispatch} />
-          <ImageGallery images={this.props.addedImages} />
-          <button className="next-page" type="button" disabled>Gallery Details</button>
+          <ImageGallery images={this.props.addedImages} deleteImage={this.deleteImage}/>
+          <button className="next-page" type="button" disabled>Gallery Details ></button>
         </section>
       </main>
     )

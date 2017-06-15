@@ -1,23 +1,25 @@
 import React from 'react'
 
-import Thumbnail from './thumbnail'
+import Thumbnail from './instagram-thumbnail'
 
 export default function InstagramImages(props) {
   const images = props.urls.map((image, index) => {
-    return <Thumbnail src={image} key={index} chooseImages={props.chooseImages} />
+    return <Thumbnail src={image} key={index} toggleChosen={props.toggleChosen} />
   })
 
   return (
     <div className="instagram-box" style={styles.box} >
       <div className="close" style={styles.close} onClick={props.close}>&#10006;</div>
-      <header>
-        <p>Choose the images you want to add to your gallery: </p>
-      </header>
-      <section className="instagramImages" style={styles.container}>
-        {images}
-      </section>
-      <div style={styles.footer}>
-        <button type="button" onClick={props.addImages} >Add Images</button>
+      <div className="instagram-box-content" style={styles.content}>
+        <header>
+          <p>Choose the images you want to add to your gallery: ({props.chosenImageAmount} images chosen)</p>
+        </header>
+        <section className="instagramImages" style={styles.container}>
+          {images}
+        </section>
+        <div style={styles.footer}>
+          <button type="button" onClick={props.addImages} disabled={props.chosenImageAmount === 0} >Add Images</button>
+        </div>
       </div>
     </div>
 
@@ -28,7 +30,8 @@ const styles = {
   box: {
     position: 'relative',
     border: '1px solid lightgray',
-    padding: '5px 10px'
+    padding: '5px 10px',
+    overflowY: 'hidden'
   },
   close: {
     position: 'absolute',
@@ -36,6 +39,9 @@ const styles = {
     cursor: 'pointer',
     color: 'gray',
     fontSize: '20px'
+  },
+  content: {
+    bottom: 0
   },
   container: {
     display: 'flex',

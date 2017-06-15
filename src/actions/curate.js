@@ -24,3 +24,9 @@ export const readFile = (data) => dispatch => {
   reader.onerror = (error) => dispatch(fetchImageError(error))
   reader.readAsDataURL(data)
 }
+
+export const DELETE_IMAGE = 'DELETE_IMAGE';
+export const deleteImage = (data) => ({
+    type: DELETE_IMAGE,
+    payload: data
+});

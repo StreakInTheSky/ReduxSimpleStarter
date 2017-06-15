@@ -1,4 +1,5 @@
 import React from 'react'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 import InstagramImages from './view-instagram-images'
 import * as actions from '../../actions/curate'
@@ -13,7 +14,7 @@ export default class CurateInstagram extends React.Component {
       fetchedFromInstagram: [],
       fetchInstagramBy: 'Username',
       isFetchingImages: false,
-      imagesLoaded: false,
+      showInstagramDropdown: false,
       imagesToAdd: []
     }
 
@@ -22,8 +23,9 @@ export default class CurateInstagram extends React.Component {
     this.changeFetchingMessage = this.changeFetchingMessage.bind(this)
     this.switchFetchInstagramBy = this.switchFetchInstagramBy.bind(this)
     this.fetchImagesFromInstagram = this.fetchImagesFromInstagram.bind(this)
-    this.chooseFetchedImages = this.chooseFetchedImages.bind(this)
-    this.addFetchedImages = this.addFetchedImages.bind(this)
+    this.toggleChosen = this.toggleChosen.bind(this)
+    this.addImages = this.addImages.bind(this)
+    this.openDropdown = this.openDropdown.bind(this)
     this.renderMessages = this.renderMessages.bind(this)
     this.renderGallery = this.renderGallery.bind(this)
     this.closeGallery = this.closeGallery.bind(this)
@@ -63,7 +65,7 @@ export default class CurateInstagram extends React.Component {
       this.setState({
         fetchedFromInstagram: xhr.response,
         isFetchingImages: false,
-        imagesLoaded: true,
+        showInstagramDropdown: true,
       })
     };
     xhr.open('GET', url);
@@ -71,13 +73,25 @@ export default class CurateInstagram extends React.Component {
     xhr.send();
   }
 
-  chooseFetchedImages(event) {
-    const imageSrc = event.target.getAttribute('src')
-    this.setState({ imagesToAdd: [...this.state.imagesToAdd, imageSrc]})
+  toggleChosen(imgSrc) {
+    if (this.state.imagesToAdd.includes(imgSrc)) {
+      const images = [...this.state.imagesToAdd]
+      images.splice(images.indexOf(imgSrc), 1)
+      this.setState({ imagesToAdd: images })
+    } else {
+      this.setState({ imagesToAdd: [...this.state.imagesToAdd, imgSrc]})
+    }
   }
 
-  addFetchedImages() {
+  addImages() {
+    this.setState({ imagesToAdd: [], showInstagramDropdown: false })
     this.state.imagesToAdd.forEach(imageUrl => this.props.fetchImages(imageUrl))
+  }
+
+  openDropdown() {
+    if (this.state.fetchedFromInstagram.length > 0) {
+      this.setState({ showInstagramDropdown: true })
+    }
   }
 
   renderMessages() {
@@ -92,8 +106,14 @@ export default class CurateInstagram extends React.Component {
   }
 
   renderGallery() {
-    if (this.state.imagesLoaded) {
-      return <InstagramImages urls={this.state.fetchedFromInstagram} chooseImages={this.chooseFetchedImages} addImages={this.addFetchedImages} close={this.closeGallery} />
+    if (this.state.showInstagramDropdown) {
+      return <InstagramImages
+        urls={this.state.fetchedFromInstagram}
+        toggleChosen={this.toggleChosen}
+        chosenImageAmount={this.state.imagesToAdd.length}
+        addImages={this.addImages}
+        close={this.closeGallery}
+      />
     }
     else {
       return null
@@ -101,7 +121,7 @@ export default class CurateInstagram extends React.Component {
   }
 
   closeGallery() {
-    this.setState({ imagesLoaded: false })
+    this.setState({ showInstagramDropdown: false })
   }
 
   render() {
@@ -111,12 +131,19 @@ export default class CurateInstagram extends React.Component {
     return (
       <form id="fetchImageFromInstagram" className="curate-forms" onSubmit={this.fetchImagesFromInstagram}>
         <label>Enter Instagram <span className="fetch-instagram-by" style={styles.searchBy} onClick={this.switchFetchInstagramBy} >{this.state.fetchInstagramBy}</span></label>
-        <div className="input-group" style={styles.inputGroup}>
+        <div className="input-group" style={styles.inputGroup} onClick={this.openDropdown}>
           <input type="text" ref={(input) => { this.fetchInstagramInput = input; }} required/>
           {loadingMessage}
         </div>
         <button type="submit">View Images</button>
-        {instagramGallery}
+        <CSSTransitionGroup
+          transitionName="instagram-gallery"
+          transitionAppear={true}
+          transitionAppearTimeout={2000}
+          transitionEnterTimeout={2000}
+          transitionLeaveTimeout={500}>
+          {instagramGallery}
+        </CSSTransitionGroup>
       </form>
     )
   }
