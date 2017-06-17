@@ -3,15 +3,14 @@ import React from 'react'
 import * as actions from '../../actions/curate'
 
 export default function Thumbnail(props) {
-  const deleteImage = () => {
-    props.deleteImage(props.index);
-  }
+  const deleteImage = () => { props.deleteImage(props.index); }
+
+  const viewImage = () => { props.viewImage(props.index); }
 
   return (
-
-      <div className="thumbnail-container" style={styles.imageContainer} >
-        <span className="image-delete" style={styles.delete} onClick={deleteImage}>&#10005;</span>
-        <img className="thumbnail" src={props.src} style={styles.image}  />
+      <div className="thumbnail-container" style={styles.imageContainer} onClick={viewImage}>
+        <span className="image-delete" style={styles.delete} >&#10005;</span>
+        <img className="thumbnail" src={props.src} style={styles.image} />
       </div>
 
   )

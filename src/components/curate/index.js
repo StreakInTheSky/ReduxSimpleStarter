@@ -11,26 +11,30 @@ export class CurateContainer extends React.Component {
   constructor(props) {
     super(props)
 
-    this.keyHandler = this.keyHandler.bind(this)
+    // this.keyHandler = this.keyHandler.bind(this)
     this.fetchImages = this.fetchImages.bind(this)
     this.deleteImage = this.deleteImage.bind(this)
+    this.viewImage = this.deleteImage.bind(this)
   }
 
 
-  keyHandler(event, callback) {
-    if (event.keyCode === 13) {
-      callback()
-    }
-  }
+  // keyHandler(event, callback) {
+  //   if (event.keyCode === 13) {
+  //     callback()
+  //   }
+  // }
 
   fetchImages(imageUrl) {
     this.props.dispatch(actions.fetchImage(imageUrl));
   }
 
   deleteImage(imageIndex) {
-    this.props.dispatch(actions.deleteThumbnail(imageIndex));
+    this.props.dispatch(actions.deleteImage(imageIndex));
   }
 
+  viewImage(imageIndex) {
+    this.props.dispatch(action.viewImage(imageIndex));
+  }
   render() {
 
     return (
@@ -43,14 +47,17 @@ export class CurateContainer extends React.Component {
           <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/>
           <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
           <CurateUpload dispatch={this.props.dispatch} />
-          <ImageGallery images={this.props.addedImages} deleteImage={this.deleteImage}/>
-          <button className="next-page" type="button" disabled>Gallery Details ></button>
+          <button className="next-page" type="button" disabled={this.props.addedImages > 0}>Gallery Details ></button>
+          <ImageGallery images={this.props.addedImages} deleteImage={this.deleteImage} viewImage={this.viewImage} currentImage={this.props.currentImage} />
         </section>
       </main>
     )
   }
 }
 
-const mapStateToProps = (state, props) => ({addedImages: state.curate.addedImages});
+const mapStateToProps = (state, props) => ({
+  addedImages: state.curate.addedImages,
+  currentImage: state.curate.currentImage
+});
 
 export default connect(mapStateToProps)(CurateContainer);
