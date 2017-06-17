@@ -8,7 +8,7 @@ export default function InstagramImages(props) {
   })
 
   return (
-    <div className="instagram-box" style={styles.box} >
+    <div className={props.open ? 'instagram-box open' : 'instagram-box'} style={styles.box} >
       <div className="close" style={styles.close} onClick={props.close}>&#10006;</div>
       <div className="instagram-box-content" style={styles.content}>
         <header>
@@ -22,7 +22,6 @@ export default function InstagramImages(props) {
         </div>
       </div>
     </div>
-
   )
 }
 

@@ -3,13 +3,18 @@ import React from 'react'
 import * as actions from '../../actions/curate'
 
 export default function Thumbnail(props) {
-  const deleteImage = () => { props.deleteImage(props.index); }
+  const deleteImage = () => {
+    props.deleteImage(props.index);
+    props.unviewImage();
+  }
 
   const viewImage = () => { props.viewImage(props.index); }
 
+  const unviewImage = () => { props.unviewImage(); }
+
   return (
-      <div className="thumbnail-container" style={styles.imageContainer} onClick={viewImage}>
-        <span className="image-delete" style={styles.delete} >&#10005;</span>
+      <div className="thumbnail-container" style={styles.imageContainer} onMouseEnter={viewImage} onMouseLeave={unviewImage}>
+        <span className="image-delete" style={styles.delete} onClick={deleteImage}>&#10005;</span>
         <img className="thumbnail" src={props.src} style={styles.image} />
       </div>
 
@@ -27,7 +32,8 @@ const styles = {
     display: 'inline-block',
     position: 'absolute',
     top: '-9px',
-    right: '-6px'
+    right: '-6px',
+    zIndex: 1
   },
   image: {
     position: 'absolute',

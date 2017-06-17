@@ -113,6 +113,7 @@ export default class CurateInstagram extends React.Component {
         chosenImageAmount={this.state.imagesToAdd.length}
         addImages={this.addImages}
         close={this.closeGallery}
+        open={this.state.showInstagramDropdown}
       />
     }
     else {
@@ -130,20 +131,32 @@ export default class CurateInstagram extends React.Component {
 
     return (
       <form id="fetchImageFromInstagram" className="curate-forms" onSubmit={this.fetchImagesFromInstagram}>
-        <label>Enter Instagram <span className="fetch-instagram-by" style={styles.searchBy} onClick={this.switchFetchInstagramBy} >{this.state.fetchInstagramBy}</span></label>
+        <label>
+          Enter Instagram <span
+                            className="fetch-instagram-by"
+                            style={styles.searchBy}
+                            onClick={this.switchFetchInstagramBy}>
+                            {this.state.fetchInstagramBy}
+                          </span>
+        </label>
         <div className="input-group" style={styles.inputGroup} onClick={this.openDropdown}>
           <input type="text" ref={(input) => { this.fetchInstagramInput = input; }} required/>
           {loadingMessage}
         </div>
         <button type="submit">View Images</button>
-        <CSSTransitionGroup
-          transitionName="instagram-gallery"
-          transitionAppear={true}
-          transitionAppearTimeout={2000}
-          transitionEnterTimeout={2000}
-          transitionLeaveTimeout={500}>
-          {instagramGallery}
-        </CSSTransitionGroup>
+
+
+        <div className={this.state.showInstagramDropdown ? 'instagram-gallery-container open' : 'instagram-gallery-container' }
+          style={styles.galleryContainer}>
+          <CSSTransitionGroup
+            transitionName="instagram-gallery"
+            transitionAppear={true}
+            transitionAppearTimeout={600}
+            transitionEnterTimeout={600}
+            transitionLeaveTimeout={600}>
+            {instagramGallery}
+          </CSSTransitionGroup>
+        </div>
       </form>
     )
   }
@@ -165,5 +178,8 @@ const styles = {
     top: '-0.75em',
     right: 7,
     color: 'gray'
+  },
+  galleryContainer: {
+    overflowY: 'hidden'
   }
 }

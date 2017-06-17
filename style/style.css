@@ -1,3 +1,5 @@
+
+/* Global Styles */
 body {
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -10,23 +12,6 @@ body {
 h1{ font-size: 2em }
 h2{ font-size: 1.5em }
 h3{ font-size: 1.25em }
-
-form.curate-forms {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  margin-bottom: 10px;
-}
-
-form.curate-forms input, form.curate-forms div.input-group {
-  flex-grow: 2;
-  margin: 0 10px;
-}
-
-form.curate-forms .input-group input {
-  width: 100%;
-  margin: 0;
-}
 
 button, .mock-button {
   padding: 5px;
@@ -47,8 +32,30 @@ button:disabled, button[disabled]:hover, .mock-button:disabled, .mock-button[dis
   color: lightgrey;
 }
 
-button.next-page {
-  float: right;
+form.curate-forms {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+form.curate-forms input, form.curate-forms div.input-group {
+  flex-grow: 2;
+  margin: 0 10px;
+}
+
+form.curate-forms .input-group input {
+  width: 100%;
+  margin: 0;
+}
+
+.curate-page-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.curate-page-nav button.next-page {
+  align-self: flex-end;
 }
 
 .thumbnail-container {
@@ -69,41 +76,46 @@ button.next-page {
 	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
+.hidden {
+  display: none;
+}
+
 
 /* Transition Animations */
+
+.instagram-gallery-container {
+  max-height: 0px;
+  transition: all 600ms ease-in;
+}
+
+.instagram-gallery-container.open {
+  max-height: 1000px;
+  transition: all 600ms ease-out;
+}
+
 .instagram-gallery-appear {
-  max-height: 0;
+  transform: translateY(-100%);
 }
 
 .instagram-gallery-appear.instagram-gallery-appear-active {
-  max-height: 1000px; /* approximate max height */
-
-	transition-property: all;
-	transition-duration: 2000ms;
-	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transform: translateY(0%);
+  transition: all 600ms ease-out;
 }
 
 .instagram-gallery-enter {
-  max-height: 0;
+  transform: translateY(-100%);
 }
 
 .instagram-gallery-enter.instagram-gallery-enter-active {
-	max-height: 1000px; /* approximate max height */
-
-	transition-property: all;
-	transition-duration: 2000ms;
-	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+	transform: translateY(0%);
+  transition: all 600ms ease-out;
 }
 
 .instagram-gallery-leave {
-  max-height: 1000px;
+  transform: translateY(0%);
 }
 
 .instagram-gallery-leave.instagram-gallery-leave-active {
-  overflow-y: hidden;
-	max-height: 0px; /* approximate max height */
-
-	transition-property: all;
-	transition-duration: 500ms;
-	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+	transform: translateY(-100%);
+  transition: all 600ms ease-in;
 }

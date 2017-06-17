@@ -33,8 +33,7 @@ const styles = {
   imageContainer: {
     position: 'relative',
     minWidth: 100,
-    minHeight: 100,
-    overflow: 'hidden'
+    minHeight: 100
   },
   image: {
     position: 'absolute',

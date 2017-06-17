@@ -36,3 +36,9 @@ export const viewImage = (imageKey) => ({
   type: VIEW_IMAGE,
   payload: imageKey
 });
+
+export const UNVIEW_IMAGE = 'UNVIEW_IMAGE';
+export const unviewImage = () => ({
+  type: UNVIEW_IMAGE
+
+});

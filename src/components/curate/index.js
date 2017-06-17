@@ -11,18 +11,11 @@ export class CurateContainer extends React.Component {
   constructor(props) {
     super(props)
 
-    // this.keyHandler = this.keyHandler.bind(this)
     this.fetchImages = this.fetchImages.bind(this)
     this.deleteImage = this.deleteImage.bind(this)
-    this.viewImage = this.deleteImage.bind(this)
+    this.viewImage = this.viewImage.bind(this)
+    this.unviewImage = this.unviewImage.bind(this)
   }
-
-
-  // keyHandler(event, callback) {
-  //   if (event.keyCode === 13) {
-  //     callback()
-  //   }
-  // }
 
   fetchImages(imageUrl) {
     this.props.dispatch(actions.fetchImage(imageUrl));
@@ -33,7 +26,11 @@ export class CurateContainer extends React.Component {
   }
 
   viewImage(imageIndex) {
-    this.props.dispatch(action.viewImage(imageIndex));
+    this.props.dispatch(actions.viewImage(imageIndex));
+  }
+
+  unviewImage(imageIndex) {
+    this.props.dispatch(actions.unviewImage(imageIndex));
   }
   render() {
 
@@ -41,15 +38,26 @@ export class CurateContainer extends React.Component {
       <main className="curate-main-container">
         <header className="main-header">
           <h2>Curate</h2>
-          <p>Search Instagram, upload, or enter the url of the images you want to add to a new gallery.</p>
         </header>
-        <section className="main-content">
-          <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/>
-          <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
-          <CurateUpload dispatch={this.props.dispatch} />
-          <button className="next-page" type="button" disabled={this.props.addedImages > 0}>Gallery Details ></button>
-          <ImageGallery images={this.props.addedImages} deleteImage={this.deleteImage} viewImage={this.viewImage} currentImage={this.props.currentImage} />
-        </section>
+        <div className="main-content">
+          <section className="curate-forms">
+            <div className="page-description">
+              <p>Search Instagram by username/hashtag, upload, or enter the url of the images you want to add to the gallery.</p>
+            </div>
+            <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/>
+            <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
+            <CurateUpload dispatch={this.props.dispatch} />
+            <nav className="curate-page-nav">
+              <button className="next-page" type="button" disabled={this.props.addedImages.length === 0}>Gallery Details ></button>
+            </nav>
+          </section>
+          <ImageGallery
+            images={this.props.addedImages}
+            deleteImage={this.deleteImage}
+            viewImage={this.viewImage}
+            unviewImage={this.unviewImage}
+            currentImage={this.props.currentImage} />
+        </div>
       </main>
     )
   }
