@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
+import GalleryDetails from './gallery-details'
 import ImageGallery from './image-gallery'
 import CurateInstagram from './instagram'
 import CurateUrl from './url'
@@ -40,17 +41,21 @@ export class CurateContainer extends React.Component {
           <h2>Curate</h2>
         </header>
         <div className="main-content">
-          <section className="curate-forms">
-            <div className="page-description">
-              <p>Search Instagram by username/hashtag, upload, or enter the url of the images you want to add to the gallery.</p>
-            </div>
-            <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/>
-            <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
-            <CurateUpload dispatch={this.props.dispatch} />
+          <div className="curate-contents">
+            <section className="curate-form-group">
+              <div className="page-description">
+                <p>Search Instagram by username/hashtag, upload, or enter the url of the images you want to add to the gallery.</p>
+              </div>
+              <CurateInstagram keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch}/>
+              <CurateUrl keyHandler={this.keyHandler} fetchImages={this.fetchImages} dispatch={this.props.dispatch} />
+              <CurateUpload dispatch={this.props.dispatch} />
+            </section>
             <nav className="curate-page-nav">
               <button className="next-page" type="button" disabled={this.props.addedImages.length === 0}>Gallery Details ></button>
             </nav>
-          </section>
+          </div>
+          <GalleryDetails />
+
           <ImageGallery
             images={this.props.addedImages}
             deleteImage={this.deleteImage}
