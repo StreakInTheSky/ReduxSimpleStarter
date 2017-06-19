@@ -14,7 +14,7 @@ export default function InstagramImages(props) {
         <header>
           <p>Choose the images you want to add to your gallery: ({props.chosenImageAmount} images chosen)</p>
         </header>
-        <section className="instagramImages" style={styles.container}>
+        <section className="instagram-images" style={styles.container}>
           {images}
         </section>
         <div style={styles.footer}>
