@@ -2,14 +2,9 @@ import React from 'react'
 
 export default function ImageViewer(props) {
   return (
-    <div>
-      <img className={props.image ? '' : 'hidden' } src={props.image} style={styles.image}/>
+    <div className={props.image ? "image-viewer-container" : "hidden"}>
+      <div className="close-modal"  onClick={props.unviewImage} >close</div>
+      <img className="viewed-image" src={props.image} />
     </div>
   )
-}
-
-const styles = {
-  image: {
-    height: '500px'
-  }
 }

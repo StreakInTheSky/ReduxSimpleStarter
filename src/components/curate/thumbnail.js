@@ -8,12 +8,18 @@ export default function Thumbnail(props) {
     props.unviewImage();
   }
 
+  const checkIfSelected = () => {
+    if (props.src === props.currentImage) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const viewImage = () => { props.viewImage(props.index); }
 
-  const unviewImage = () => { props.unviewImage(); }
-
   return (
-      <div className="thumbnail-container" style={styles.imageContainer} onMouseEnter={viewImage} onMouseLeave={unviewImage}>
+      <div className={ checkIfSelected() ? "thumbnail-container selected" : "thumbnail-container"} style={styles.imageContainer} onClick={viewImage} >
         <span className="image-delete" style={styles.delete} onClick={deleteImage}>&#10005;</span>
         <img className="thumbnail" src={props.src} style={styles.image} />
       </div>
@@ -33,7 +39,7 @@ const styles = {
     position: 'absolute',
     top: '-9px',
     right: '-6px',
-    zIndex: 1
+    zIndex: 3
   },
   image: {
     position: 'absolute',
