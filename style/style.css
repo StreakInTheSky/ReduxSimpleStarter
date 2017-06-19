@@ -110,6 +110,13 @@ button:disabled, button[disabled]:hover, .mock-button:disabled, .mock-button[dis
 
 
 /* Curate Page */
+.page-description {
+  height: 5em;
+}
+
+.curate-form-group {
+  height: 300px;
+}
 
 form.curate-forms {
   display: flex;
