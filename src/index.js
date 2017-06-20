@@ -11,6 +11,8 @@ import UserRegistration from './components/user-registration'
 import UserProfile from './components/user-profile'
 import UserList from './components/userlist'
 import CurateContainer from './components/curate'
+import CurateFetch from './components/curate/curate-fetch'
+import CurateDetails from './components/curate/curate-details'
 
 
 ReactDOM.render(
@@ -19,7 +21,10 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <IndexRoute component={Login} />
         <Route path="registration" component={UserRegistration} />
-        <Route path="curate" component={CurateContainer} />
+        <Route path="curate" component={CurateContainer}>
+          <Route path="fetch" component={CurateFetch} />
+          <Route path="details" component={CurateDetails} />
+        </Route>
         <Route path=":username" component={UserProfile}>
           <Route path=":userlist" component={UserList} />
         </Route>

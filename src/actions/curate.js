@@ -40,5 +40,9 @@ export const viewImage = (imageKey) => ({
 export const UNVIEW_IMAGE = 'UNVIEW_IMAGE';
 export const unviewImage = () => ({
   type: UNVIEW_IMAGE
+});
 
+export const CHANGE_PAGE = 'CHANGE_PAGE';
+export const changePage = () => ({
+  type: CHANGE_PAGE
 });
