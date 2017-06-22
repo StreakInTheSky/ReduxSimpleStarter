@@ -19,11 +19,13 @@ button, .mock-button {
   border: 1px solid grey;
   font-size: .8em;
   color: grey;
+  text-decoration: none;
 }
 
 button:hover, .mock-button:hover {
   background-color: grey;
   color: white;
+  text-decoration: none;
 }
 
 button:disabled, button[disabled]:hover, .mock-button:disabled, .mock-button[disabled]:hover {
@@ -47,7 +49,7 @@ button:disabled, button[disabled]:hover, .mock-button:disabled, .mock-button[dis
 }
 
 .close-modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   padding: 5px;
@@ -69,6 +71,7 @@ button:disabled, button[disabled]:hover, .mock-button:disabled, .mock-button[dis
 }
 
 /* Gallery Modal */
+
 .gallery-images.modal {
   position: fixed;
   top: 0;
@@ -96,28 +99,27 @@ button:disabled, button[disabled]:hover, .mock-button:disabled, .mock-button[dis
 }
 
 .image-viewer-container {
+  position: relative;
   z-index: 3;
-  max-width: 90%;
-  max-height: 75%;
+  max-width: 500px;
+  max-height: 500px;
 }
 
 .viewed-image {
   border: 3px solid lightgrey;
   background-color: white;
-  z-index: 2;
   width: 100%;
 }
 
 
 /* Curate Page */
 
-
 .page-description {
   height: 5em;
 }
 
 .curate-form-group {
-  height: 300px;
+  min-height: 300px;
 }
 
 form.curate-forms {
@@ -145,6 +147,55 @@ form.curate-forms .input-group input {
 .curate-page-nav button.next-page {
   align-self: flex-end;
 }
+
+.curate-fetch {
+  transition: transform 0.5s, opacity 0.5s;
+  transform: translate3d(0, 0, 0);
+}
+
+.curate-fetch.transition-appear {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.curate-fetch.transition-appear.transition-appear-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.curate-fetch.transition-leave {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.curate-fetch.transition-leave.transition-leave-active {
+  opacity: 0;
+  transform: translate3d(-100%, 0, 0);
+}
+
+
+.curate-details {
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.curate-details.transition-appear {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.curate-details.transition-appear.transition-appear-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.curate-details.transition-leave {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.curate-details.transition-leave.transition-leave-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+  }
+
 
 /* Instagram Pop-up */
 .instagram-images .thumbnail-container.selected {
