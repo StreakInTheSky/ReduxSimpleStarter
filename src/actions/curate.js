@@ -42,7 +42,27 @@ export const unviewImage = () => ({
   type: UNVIEW_IMAGE
 });
 
-export const CHANGE_PAGE = 'CHANGE_PAGE';
-export const changePage = () => ({
-  type: CHANGE_PAGE
+export const ADD_TITLE = 'ADD_TITLE';
+export const addTitle = (title) => ({
+  type: ADD_TITLE,
+  payload: title
+});
+
+export const ADD_DESCRIPTION = 'ADD_DESCRIPTION';
+export const addDescription = (description) => ({
+  type: ADD_DESCRIPTION,
+  payload: description
+});
+
+export const ADD_TAG = 'ADD_TAG';
+export const addTag = (key, tag) => ({
+  type: ADD_TAG,
+  key,
+  tag
+});
+
+export const REMOVE_TAG = 'REMOVE_TAG';
+export const removeTag = (key) => ({
+  type: REMOVE_TAG,
+  payload: key
 });
