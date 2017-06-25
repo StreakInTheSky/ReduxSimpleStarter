@@ -66,3 +66,21 @@ export const removeTag = (key) => ({
   type: REMOVE_TAG,
   payload: key
 });
+
+export const SUBMIT_GALLERY_SUCCESS = 'SUBMIT_GALLERY_SUCCESS';
+export const submitGallerySuccess = (data) => ({
+    type: SUBMIT_GALLERY_SUCCESS,
+    payload: data
+});
+
+export const SUBMIT_GALLERY_ERROR= 'SUBMIT_GALLERY_ERROR';
+export const submitGalleryError = (error) => ({
+    type: SUBMIT_GALLERY_ERROR,
+    payload: error
+});
+
+export const submitGallery = (galleryData) => dispatch => {
+  axios.post('http://localhost:3000/api/gallery/', { data: galleryData })
+  .then((username) => dispatch(submitGallerySuccess(username)))
+  .catch(error => dispatch(submitGalleryError(error)));
+};

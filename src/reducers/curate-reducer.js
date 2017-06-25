@@ -7,7 +7,9 @@ import {
   ADD_TITLE,
   ADD_DESCRIPTION,
   ADD_TAG,
-  REMOVE_TAG
+  REMOVE_TAG,
+  SUBMIT_GALLERY_SUCCESS,
+  SUBMIT_GALLERY_ERROR
 } from '../actions/curate'
 
 const initialState = {
@@ -43,7 +45,12 @@ export default function(state = initialState, action) {
     const tags = [...state.tags]
     tags.splice(action.payload, 1)
     return Object.assign({}, state, { tags: tags })
+  } else if (action.type === SUBMIT_GALLERY_SUCCESS) {
+    console.log(`Gallery Posted by ${action.payload}`)
+  } else if (action.type === SUBMIT_GALLERY_ERROR) {
+    console.error(action.payload)
   }
-  console.log(state)
+
+
   return state
 }
