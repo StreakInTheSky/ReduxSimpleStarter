@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+// import PageTransition from 'react-router-page-transition';
 
 import ImageGallery from './image-gallery'
 import * as actions from '../../actions/curate'
@@ -32,8 +33,9 @@ export class CurateContainer extends React.Component {
           <h2>Curate</h2>
         </header>
         <div className="main-content">
-
-          {this.props.children}
+          {/* <PageTransition> */}
+            {this.props.children}
+          {/* </PageTransition> */}
 
           <div className="curate-gallery">
             <ImageGallery

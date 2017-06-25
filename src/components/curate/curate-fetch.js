@@ -21,7 +21,7 @@ export class CurateFetch extends React.Component {
 
   render() {
     return(
-      <div className="curate-contents curate-fetch">
+      <div className="curate-contents curate-fetch transition-item">
         <section className="curate-form-group">
           <div className="page-description">
             <p>Search Instagram by username/hashtag, upload, or enter the url of the images you want to add to the gallery.</p>
