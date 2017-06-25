@@ -22,13 +22,23 @@ button, .mock-button {
   text-decoration: none;
 }
 
+.mock-button-disabled {
+  padding: 5px;
+  border: 1px solid lightgrey;
+  background-color: white;
+  color: lightgrey;
+  font-size: .8em;
+  text-decoration: none;
+  pointer-events: none;
+}
+
 button:hover, .mock-button:hover {
   background-color: grey;
   color: white;
   text-decoration: none;
 }
 
-button:disabled, button[disabled]:hover, .mock-button:disabled, .mock-button[disabled]:hover {
+button:disabled, button[disabled]:hover {
   border: 1px solid lightgrey;
   background-color: white;
   color: lightgrey;

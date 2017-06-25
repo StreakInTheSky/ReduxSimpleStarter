@@ -9,6 +9,10 @@ export class CurateDetails extends React.Component {
   constructor(props){
     super(props)
 
+    this.state = {
+      isValid: false
+    }
+
     this.galleryTitle = null;
     this.galleryDescription = null;
 
@@ -17,6 +21,16 @@ export class CurateDetails extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
     this.submitGallery = this.submitGallery.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {title, description} = nextProps.details
+
+    if (title && description) {
+      this.setState({ isValid: true })
+    } else {
+      this.setState({ isValid: false})
+    }
   }
 
   addTitle() {
@@ -32,12 +46,13 @@ export class CurateDetails extends React.Component {
   }
 
   handleAddition(tag) {
-    this.props.dispatch(actions.addTag(this.props.state.tags.length + 1, tag))
+    this.props.dispatch(actions.addTag(this.props.details.tags.length + 1, tag))
   }
 
   submitGallery() {
-    this.props.dispatch(actions.submitGallery(this.props.state))
+    this.props.dispatch(actions.submitGallery(this.props.details))
   }
+
 
 
   render() {
@@ -49,12 +64,12 @@ export class CurateDetails extends React.Component {
           </div>
           <form id="galleryDetails" className="curate-forms" onSubmit={this.submitGallery}>
             <label>Title*</label>
-            <input type="text" ref={(input) => { this.galleryTitle = input; }} onChange={this.addTitle} required/>
+            <input type="text" ref={(input) => { this.galleryTitle = input; }} onChange={this.addTitle} />
             <label>Description*</label>
-            <textarea ref={(input) => { this.galleryDescription = input; }} onChange={this.addDescription} required/>
+            <textarea ref={(input) => { this.galleryDescription = input; }} onChange={this.addDescription} />
             <label>Tags</label>
             <ReactTags
-              tags={this.props.state.tags}
+              tags={this.props.details.tags}
               placeholder={null}
               handleDelete={this.handleDelete}
               handleAddition={this.handleAddition}
@@ -63,7 +78,7 @@ export class CurateDetails extends React.Component {
         </section>
         <nav className="curate-page-nav">
           <Link className="mock-button next-page" to={'/curate/fetch'} >&#60; Back</Link>
-          <button type="submit" disabled={this.props.state.addedImages.length === 0} >Post Gallery</button>
+          <button type="submit" disabled={!this.state.isValid} >Post Gallery</button>
         </nav>
       </div>
     )
@@ -71,7 +86,7 @@ export class CurateDetails extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  state: state.curate
+  details: state.curate
 });
 
 export default connect(mapStateToProps)(CurateDetails);

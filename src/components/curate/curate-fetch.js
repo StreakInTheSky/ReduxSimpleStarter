@@ -31,11 +31,15 @@ export class CurateFetch extends React.Component {
           <CurateUpload dispatch={this.props.dispatch} />
         </section>
         <nav className="curate-page-nav">
-          <Link className="mock-button next-page" to={'/curate/details'} >Gallery Details &#62;</Link>
+          <Link className={this.props.addedImagesLength ? 'mock-button' : 'mock-button-disabled' } to={'/curate/details'} >Gallery Details &#62;</Link>
         </nav>
       </div>
     )
   }
 }
 
-export default connect()(CurateFetch);
+const mapStateToProps = (state, props) => ({
+  addedImagesLength: state.curate.addedImages.length
+});
+
+export default connect(mapStateToProps)(CurateFetch);
