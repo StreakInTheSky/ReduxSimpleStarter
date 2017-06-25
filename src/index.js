@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory, IndexRedirect} from 'react-router';
 
 import store from './store'
 
@@ -22,6 +22,7 @@ ReactDOM.render(
         <IndexRoute component={Login} />
         <Route path="registration" component={UserRegistration} />
         <Route path="curate" component={CurateContainer}>
+          <IndexRedirect to="fetch" />
           <Route path="fetch" component={CurateFetch} />
           <Route path="details" component={CurateDetails} />
         </Route>
