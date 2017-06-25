@@ -21,7 +21,7 @@ export default function ImageGallery(props) {
       <div className={props.currentImage ? "modal-background" : "hidden"} onClick={props.unviewImage} />
       <div className="image-view-content">
         <h5 className={props.currentImage ? "hidden" : "" }>Images in gallery:</h5>
-        <ImageViewer image={props.currentImage} />
+        <ImageViewer image={props.currentImage} unviewImage={props.unviewImage}/>
         <div className="thumbnails">
           {images}
         </div>
