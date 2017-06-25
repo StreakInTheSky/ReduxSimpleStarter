@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 export default function UserListing(props) {
   const followUser = () => {
-    props.followUser(props.username)
+    props.followUser(props.id)
   }
 
   return (

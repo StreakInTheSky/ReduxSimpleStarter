@@ -12,8 +12,8 @@ export class UserList extends React.Component {
     this.back = this.back.bind(this)
   }
 
-  followUser(user){
-    console.log(`followed ${user}`)
+  followUser(userId){
+    console.log(`followed ${userId}`)
   }
 
   back(event){
@@ -27,7 +27,7 @@ export class UserList extends React.Component {
 
   renderUsers = () => {
     return this.props[this.props.params.userlist].map(user => {
-      return <UserListing username={user.username} key={user._id} followUser={this.followUser} />
+      return <UserListing username={user.username} key={user.id} followUser={this.followUser} />
     })
   }
 
