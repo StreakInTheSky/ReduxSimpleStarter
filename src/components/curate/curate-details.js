@@ -16,15 +16,14 @@ export class CurateDetails extends React.Component {
     this.addDescription = this.addDescription.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
+    this.submitGallery = this.submitGallery.bind(this)
   }
 
   addTitle() {
-    console.log({ title: this.props.title })
     this.props.dispatch(actions.addTitle(this.galleryTitle.value))
   }
 
   addDescription() {
-    console.log({ description: this.props.description })
     this.props.dispatch(actions.addDescription(this.galleryDescription.value))
   }
 
@@ -33,7 +32,11 @@ export class CurateDetails extends React.Component {
   }
 
   handleAddition(tag) {
-    this.props.dispatch(actions.addTag(this.props.tags.length + 1, tag))
+    this.props.dispatch(actions.addTag(this.props.state.tags.length + 1, tag))
+  }
+
+  submitGallery() {
+    this.props.dispatch(actions.submitGallery(this.props.state))
   }
 
 
@@ -44,14 +47,14 @@ export class CurateDetails extends React.Component {
           <div className="page-description">
             <p>Add a title and description to your gallery. Add tags so people can easily find your gallery.</p>
           </div>
-          <form id="galleryDetails" className="curate-forms">
+          <form id="galleryDetails" className="curate-forms" onSubmit={this.submitGallery}>
             <label>Title*</label>
             <input type="text" ref={(input) => { this.galleryTitle = input; }} onChange={this.addTitle} required/>
             <label>Description*</label>
             <textarea ref={(input) => { this.galleryDescription = input; }} onChange={this.addDescription} required/>
             <label>Tags</label>
             <ReactTags
-              tags={this.props.tags}
+              tags={this.props.state.tags}
               placeholder={null}
               handleDelete={this.handleDelete}
               handleAddition={this.handleAddition}
@@ -60,7 +63,7 @@ export class CurateDetails extends React.Component {
         </section>
         <nav className="curate-page-nav">
           <Link className="mock-button next-page" to={'/curate/fetch'} >&#60; Back</Link>
-          <button type="submit" disabled={this.props.addedImagesLength === 0}>Post Gallery</button>
+          <button type="submit" disabled={this.props.state.addedImages.length === 0} >Post Gallery</button>
         </nav>
       </div>
     )
@@ -68,10 +71,7 @@ export class CurateDetails extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  addedImagesLength: state.curate.addedImages.length,
-  tags: state.curate.tags,
-  title: state.curate.title,
-  description: state.curate.description
+  state: state.curate
 });
 
 export default connect(mapStateToProps)(CurateDetails);
