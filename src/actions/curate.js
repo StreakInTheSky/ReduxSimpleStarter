@@ -79,8 +79,24 @@ export const submitGalleryError = (error) => ({
     payload: error
 });
 
-export const submitGallery = (galleryData) => dispatch => {
-  axios.post('http://localhost:3000/api/gallery/', { data: galleryData })
-  .then((username) => dispatch(submitGallerySuccess(username)))
+export const submitGallery = ({user, title, description, addedImages}) => dispatch => {
+  const gallery = {
+    user,
+    title,
+    description
+  }
+  axios.post('http://localhost:3000/api/gallery/', { data: gallery })
+  .then(res => {
+    return Promise.all(addedImages.map(image => {
+      const imageData = {
+        path: image,
+        gallery: res.data.id,
+        user: res.data.user
+      }
+      return axios.post('http://localhost:3000/api/image/', { data: imageData })
+        .catch(error => dispatch(submitGalleryError(error)))
+    }))
+  })
+  .then(() => dispatch(submitGallerySuccess()))
   .catch(error => dispatch(submitGalleryError(error)));
 };

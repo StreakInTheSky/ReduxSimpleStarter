@@ -18,7 +18,7 @@ const initialState = {
   addedImages: [],
   currentImage: null,
   tags: [],
-  user: 'StreakInTheSky'
+  user: '594b802760031e12c50ac26d'
 }
 
 export default function(state = initialState, action) {
@@ -46,7 +46,8 @@ export default function(state = initialState, action) {
     tags.splice(action.payload, 1)
     return Object.assign({}, state, { tags: tags })
   } else if (action.type === SUBMIT_GALLERY_SUCCESS) {
-    console.log(`Gallery Posted by ${action.payload}`)
+    console.log("Gallery successfully created")
+    // Go to Profile
   } else if (action.type === SUBMIT_GALLERY_ERROR) {
     console.error(action.payload)
   }

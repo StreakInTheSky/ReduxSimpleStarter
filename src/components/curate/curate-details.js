@@ -18,8 +18,8 @@ export class CurateDetails extends React.Component {
 
     this.addTitle = this.addTitle.bind(this);
     this.addDescription = this.addDescription.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleAddition = this.handleAddition.bind(this);
+    // this.handleDelete = this.handleDelete.bind(this);
+    // this.handleAddition = this.handleAddition.bind(this);
     this.submitGallery = this.submitGallery.bind(this)
   }
 
@@ -41,13 +41,13 @@ export class CurateDetails extends React.Component {
     this.props.dispatch(actions.addDescription(this.galleryDescription.value))
   }
 
-  handleDelete(i) {
-    this.props.dispatch(actions.removeTag(i))
-  }
-
-  handleAddition(tag) {
-    this.props.dispatch(actions.addTag(this.props.details.tags.length + 1, tag))
-  }
+  // handleDelete(i) {
+  //   this.props.dispatch(actions.removeTag(i))
+  // }
+  //
+  // handleAddition(tag) {
+  //   this.props.dispatch(actions.addTag(this.props.details.tags.length + 1, tag))
+  // }
 
   submitGallery() {
     this.props.dispatch(actions.submitGallery(this.props.details))
@@ -62,23 +62,23 @@ export class CurateDetails extends React.Component {
           <div className="page-description">
             <p>Add a title and description to your gallery. Add tags so people can easily find your gallery.</p>
           </div>
-          <form id="galleryDetails" className="curate-forms" onSubmit={this.submitGallery}>
+          <form id="galleryDetails" className="curate-forms">
             <label>Title*</label>
             <input type="text" ref={(input) => { this.galleryTitle = input; }} onChange={this.addTitle} />
             <label>Description*</label>
             <textarea ref={(input) => { this.galleryDescription = input; }} onChange={this.addDescription} />
-            <label>Tags</label>
+            {/* <label>Tags</label>
             <ReactTags
               tags={this.props.details.tags}
               placeholder={null}
               handleDelete={this.handleDelete}
               handleAddition={this.handleAddition}
-              allowDeleteFromEmptyInput={false} />
+              allowDeleteFromEmptyInput={false} /> */}
           </form>
         </section>
         <nav className="curate-page-nav">
           <Link className="mock-button next-page" to={'/curate/fetch'} >&#60; Back</Link>
-          <button type="submit" disabled={!this.state.isValid} >Post Gallery</button>
+          <button onClick={this.submitGallery} disabled={!this.state.isValid} >Post Gallery</button>
         </nav>
       </div>
     )
