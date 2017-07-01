@@ -18,7 +18,7 @@ const initialState = {
   addedImages: [],
   currentImage: null,
   tags: [],
-  user: '594b802760031e12c50ac26d'
+  user: '5955d20692fb2e32c9f508c0'
 }
 
 export default function(state = initialState, action) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
 import UserListing from './user-listing'
 
@@ -12,11 +12,11 @@ export class UserList extends React.Component {
     this.back = this.back.bind(this)
   }
 
-  followUser(userId){
+  followUser(userId) {
     console.log(`followed ${userId}`)
   }
 
-  back(event){
+  back(event) {
     console.log(event.target)
     console.log(this.box.childNodes)
     if (!(event.target === this.box.childNodes)) {
@@ -24,10 +24,9 @@ export class UserList extends React.Component {
     }
   }
 
-
   renderUsers = () => {
     return this.props[this.props.params.userlist].map(user => {
-      return <UserListing username={user.username} key={user.id} followUser={this.followUser} />
+      return <UserListing username={user.username} key={user.id} followUser={this.followUser}/>
     })
   }
 
@@ -35,8 +34,10 @@ export class UserList extends React.Component {
 
     return (
       <div className="modal-container" style={styles.container}>
-        <div className="screen-overlay" style={styles.overlay} onClick={this.back} />
-        <div className="modal-box" style={styles.box} ref={box => {this.box = box}}>
+        <div className="screen-overlay" style={styles.overlay} onClick={this.back}/>
+        <div className="modal-box" style={styles.box} ref={box => {
+          this.box = box
+        }}>
           <div style={styles.header}>
             <h4>{this.props.params.userlist}</h4>
           </div>
@@ -71,7 +72,7 @@ const styles = {
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: 'rgba(0,0,0,0.7)'
   },
   box: {
     position: 'relative',
@@ -100,11 +101,7 @@ const styles = {
 }
 
 const mapStateToProps = (state, props) => {
-  return {
-    followers: state.user.followers,
-    following: state.user.following
-  }
+  return {followers: state.user.followers, following: state.user.following}
 }
-
 
 export default connect(mapStateToProps)(UserList)
