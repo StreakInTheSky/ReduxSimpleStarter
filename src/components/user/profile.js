@@ -25,8 +25,11 @@ export class UserProfile extends React.Component {
 
     return (
       <main className="content">
-        <section className="user-info">
-          <h2 className="username">{user.username}</h2>
+        <section className="profile-header">
+          <div className="user-info">
+            <h2 className="username">{user.username}</h2>
+            <span className="mock-button follow-button" >Follow</span>
+          </div>
           <ProfileMenu username={user.username} following={user.following} followers={user.followers} />
         </section>
         {galleries}

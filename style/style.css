@@ -77,7 +77,82 @@ button:disabled, button[disabled]:hover {
 }
 
 .thumbnail-container.selected {
-  border: 2px solid #22AA33;
+  border: 2px solid #5bc7a0;
+}
+
+/* Profile Page */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+}
+
+.user-info * {
+  display: inline-block;
+}
+
+.username {
+  margin-right: 10px;
+}
+
+.follow-button {
+  padding: 8px 16px;
+  font-size: 0.9em;
+  background-color: #5bc7a0;
+  color: white;
+  border: none;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.03em;
+  font-family: 'Helvetica Neue';
+  position: relative;
+  top: -1px;
+  cursor: default;
+}
+
+.user-menu-item {
+  position: relative;
+  margin: 0 15px;
+}
+
+.user-menu-item:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 2px;
+  height: 1.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -15px;
+  background-color: grey;
+}
+
+.user-menu-item:last-child {
+  margin-right: 0;
+}
+
+.user-menu-item:last-child:after {
+  content: none;
+}
+
+/* Gallery */
+.gallery {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.gallery-name {
+  margin-top: 0;
+  display: inline;
+}
+
+.favorite-star {
+  margin: 10px;
+  cursor: default;
+  font-size: 1.25em;
 }
 
 /* Gallery Modal */
