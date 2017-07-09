@@ -18,6 +18,7 @@ export class UserProfile extends React.Component {
 
   render() {
     const user = this.props.user;
+    console.log(user)
 
     const galleries = user.galleries.map((gallery, index) => {
       return <Gallery key={index} gallery={gallery} />;

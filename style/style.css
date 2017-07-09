@@ -68,7 +68,6 @@ button:disabled, button[disabled]:hover {
 }
 
 .thumbnail-container {
-  margin: 3px;
   width: 15%;
   padding-bottom: 14.5%;
   box-sizing: border-box;
@@ -85,7 +84,7 @@ button:disabled, button[disabled]:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
+  min-height: 100px;
 }
 
 .user-info * {
@@ -105,7 +104,7 @@ button:disabled, button[disabled]:hover {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
   letter-spacing: 0.03em;
-  font-family: 'Helvetica Neue';
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   position: relative;
   top: -1px;
   cursor: default;
@@ -144,6 +143,10 @@ button:disabled, button[disabled]:hover {
   align-items: stretch;
 }
 
+.gallery-info {
+  min-width: 200px;
+}
+
 .gallery-name {
   margin-top: 0;
   display: inline;
@@ -154,6 +157,47 @@ button:disabled, button[disabled]:hover {
   cursor: default;
   font-size: 1.25em;
 }
+
+.favorite-star:hover {
+  content: '&#9733;';
+  color: #5bc7a0;
+}
+
+.gallery-image-viewer {
+  min-width: 200px;
+}
+
+.viewed-image-container {
+  width: 400px;
+  height: 300px;
+  border: 3px solid lightgrey;
+}
+
+.viewed-image {
+  height: 100%;
+}
+
+.gallery-thumbnails {
+  display: inline-grid;
+  grid-template-columns: 80px;
+  grid-template-rows: 80px;
+
+  min-width: 200px;
+}
+
+.gallery-thumbnails .thumbnail-container {
+  position: relative;
+  width: 75px;
+  height: 75px;
+}
+
+.gallery-thumbnails .thumbnail {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%)
+}
+
 
 /* Gallery Modal */
 
@@ -183,14 +227,14 @@ button:disabled, button[disabled]:hover {
   bottom: 10px;
 }
 
-.image-viewer-container {
+.gallery-images.modal .image-viewer-container {
   position: relative;
   z-index: 3;
   max-width: 500px;
   max-height: 500px;
 }
 
-.viewed-image {
+.gallery-images.modal .viewed-image {
   border: 3px solid lightgrey;
   background-color: white;
   width: 100%;

@@ -10,9 +10,16 @@ export default class Gallery extends React.Component {
     this.state = {
       currentImage: this.props.gallery.images[0]
     }
+
+    this.viewImage = this.viewImage.bind(this)
+  }
+
+  viewImage(imgIndex) {
+    this.setState({currentImage: this.props.gallery.images[imgIndex]})
   }
 
   render() {
+    console.log(this.props.gallery)
     const {title, description, username, images, tags} = this.props.gallery
 
     return (
@@ -24,7 +31,7 @@ export default class Gallery extends React.Component {
           {/* <Hashtags tags={tags} /> */}
         </div>
         <ImageViewer image={this.state.currentImage}/>
-        <GalleryCollection images={images} />
+        <GalleryCollection images={images} viewImage={this.viewImage}/>
       </div>
     )
   }
