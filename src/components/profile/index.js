@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link } from 'react-router'
 
-import * as actions from '../../actions/user'
+import * as actions from '../../actions/profile'
 import ProfileMenu from './profile-menu'
 import Gallery from '../gallery'
 
@@ -45,7 +45,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state, props) {
-  return { user: state.user }
+  return { profile: state.user }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile)

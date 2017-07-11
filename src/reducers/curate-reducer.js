@@ -18,7 +18,7 @@ const initialState = {
   addedImages: [],
   currentImage: null,
   tags: [],
-  user: '5955d20692fb2e32c9f508c0'
+  user: '595d9aaf960cfd0c66492386'
 }
 
 export default function(state = initialState, action) {
@@ -47,7 +47,7 @@ export default function(state = initialState, action) {
     return Object.assign({}, state, { tags: tags })
   } else if (action.type === SUBMIT_GALLERY_SUCCESS) {
     console.log("Gallery successfully created")
-    // Go to Profile
+    // Go to Dashboard
   } else if (action.type === SUBMIT_GALLERY_ERROR) {
     console.error(action.payload)
   }

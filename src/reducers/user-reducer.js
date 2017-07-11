@@ -1,6 +1,8 @@
 import {
-  FETCH_USER_INFO_SUCCESS,
-  FETCH_USER_INFO_ERROR
+  FETCH_USER_SUCCESS,
+  FETCH_USER_ERROR,
+  SIGNOUT_USER_SUCCESS,
+  SIGNOUT_USER_ERROR,
 } from '../actions/user'
 
 const initialState = {
@@ -9,13 +11,20 @@ const initialState = {
   following: [],
   galleries: [],
   id: '',
-  username: ''
+  username: '',
+  token: '',
+  user: null
 }
 
 export default function(state = initialState, action) {
-  if (action.type === FETCH_USER_INFO_SUCCESS) {
+  if (action.type === FETCH_USER_SUCCESS) {
+    console.log(action.payload)
     state = Object.assign({}, state, action.payload)
-  } else if (action.type === FETCH_USER_INFO_ERROR) {
+  } else if (action.type === FETCH_USER_ERROR) {
+    console.error(action.payload)
+  } else if (action.type === SIGNOUT_USER_SUCCESS) {
+    state = Object.assign({}, initialState)
+  } else if (action.type === SIGNOUT_USER_ERROR) {
     console.error(action.payload)
   }
 

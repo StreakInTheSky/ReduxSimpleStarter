@@ -1,19 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import {Router, Route, IndexRoute, browserHistory, IndexRedirect} from 'react-router';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import {Router, Route, IndexRoute, browserHistory, IndexRedirect} from 'react-router'
 
 import store from './store'
 
 import App from './components/app'
 import Login from './components/login'
 import UserRegistration from './components/user-registration'
-import UserProfile from './components/user/profile'
-import UserList from './components/user/userlist'
+import UserProfile from './components/profile'
+import UserList from './components/profile/userlist'
 import CurateContainer from './components/curate'
 import CurateFetch from './components/curate/curate-fetch'
 import CurateDetails from './components/curate/curate-details'
-
 
 ReactDOM.render(
   <Provider store={store}>
