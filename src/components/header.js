@@ -20,12 +20,13 @@ class Header extends React.Component {
   }
 
   render() {
+
     return (
       <header className="page-topper">
         <h1>Curator-Rater</h1>
         {/* <MainNav /> */}
         {/* <ProfileMenu /> */}
-        <span onClick={() => this.handleAuth()}>{this.props.user.user ? 'logout' : 'login'}</span>
+        <span className="mock-button" onClick={() => this.handleAuth()}>{this.props.user.user ? 'logout' : 'login'}</span>
       </header>
     )
   }

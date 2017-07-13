@@ -17,7 +17,7 @@ export class UserProfile extends React.Component {
  }
 
   render() {
-    const user = this.props.user;
+    const user = this.props.profile;
     console.log(user)
 
     const galleries = user.galleries.map((gallery, index) => {
@@ -45,7 +45,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state, props) {
-  return { profile: state.user }
+  return { profile: state.profile }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile)
