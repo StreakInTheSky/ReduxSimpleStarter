@@ -24,14 +24,14 @@ export class UserList extends React.Component {
     }
   }
 
-  renderUsers = () => {
-    return this.props[this.props.params.userlist].map(user => {
+  renderUsers() {
+    console.log(this.props.history)
+    return this.props[this.props.match.params.userlist].map(user => {
       return <UserListing username={user.username} key={user.id} followUser={this.followUser}/>
     })
   }
 
   render() {
-
     return (
       <div className="modal-container" style={styles.container}>
         <div className="screen-overlay" style={styles.overlay} onClick={this.back}/>
@@ -39,7 +39,7 @@ export class UserList extends React.Component {
           this.box = box
         }}>
           <div style={styles.header}>
-            <h4>{this.props.params.userlist}</h4>
+            <h4>{this.props.match.params.userlist}</h4>
           </div>
           <div style={styles.content}>
             <ul style={styles.ul}>{this.renderUsers()}</ul>

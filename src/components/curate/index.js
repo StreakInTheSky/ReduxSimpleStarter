@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Route, Redirect, Switch } from 'react-router-dom';
 // import PageTransition from 'react-router-page-transition';
 
 import ImageGallery from './image-gallery'
+import CurateFetch from './curate-fetch'
+import CurateDetails from './curate-details'
 import * as actions from '../../actions/curate'
 
 export class CurateContainer extends React.Component {
@@ -26,7 +29,6 @@ export class CurateContainer extends React.Component {
     this.props.dispatch(actions.unviewImage(imageIndex));
   }
   render() {
-
     return (
       <main className="curate-main-container">
         <header className="main-header">
@@ -34,7 +36,10 @@ export class CurateContainer extends React.Component {
         </header>
         <div className="main-content">
           {/* <PageTransition> */}
-            {this.props.children}
+            <Switch>
+              <Route path="/curate/fetch" component={CurateFetch} />
+              <Route path="/curate/details" component={CurateDetails} />
+            </Switch>
           {/* </PageTransition> */}
 
           <div className="curate-gallery">

@@ -18,6 +18,6 @@ export default function(state = initialState, action) {
   } else if (action.type === FETCH_USER_INFO_ERROR) {
     console.error(action.payload)
   }
-  
+
   return state
 }
