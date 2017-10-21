@@ -31,6 +31,7 @@ export class CurateContainer extends React.Component {
   render() {
     return (
       <main className="curate-main-container">
+        <Route exact path="/curate" render={() => <Redirect to="/curate/fetch" component={CurateFetch} />} />
         <header className="main-header">
           <h2>Curate</h2>
         </header>
