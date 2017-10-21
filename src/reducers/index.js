@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { combineForms } from 'react-redux-form';
-import UserReducer from './user-reducer';
 import ProfileReducer from './profile-reducer';
 import CurateReducer from './curate-reducer';
 
@@ -17,7 +16,6 @@ const initialRegistrationState = {
 };
 
 const rootReducer = combineReducers({
-  user: UserReducer,
   profile: ProfileReducer,
   curate: CurateReducer,
   forms: combineForms({
