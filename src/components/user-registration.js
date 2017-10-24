@@ -2,19 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Control, Form, Errors, model } from 'react-redux-form';
 
-import * as actions from '../actions/user';
+import * as actions from '../actions/profile';
 
 export class UserRegistration extends React.Component {
-  // checkPasswordsMatch() {
-  //   return this.props.password === this.props.passwordConfirm
-  // }
+  constructor(props) {
+    super(props)
+
+    this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this)
+  }
+
+  checkPasswordsMatch() {
+    return this.props.password === this.props.passwordConfirm
+  }
 
   registerUser(values){
-    this.props.dispatch(actions.registerUser(values))
+    this.props.dispatch(actions.createUser(values))
+    console.log(values)
   }
 
   render() {
-    console.log(this.props)
     const errorStyles = {
       position: "relative",
       zIndex: 10,
@@ -63,7 +69,7 @@ export class UserRegistration extends React.Component {
           validators={{
             minLength: (val) => val.length >= 8
           }}
-          validateOn="blur"
+          validateOn="change"
           />
         <Errors
           style={errorStyles}
@@ -77,20 +83,20 @@ export class UserRegistration extends React.Component {
         <br />
         <label htmlFor="register-password-confirm">re-type password:</label>
         <Control type="password" model="forms.register.passwordConfirm" id="register-password-confirm" required
-          //   validators={{
-          //     passwordsMatch: checkPasswordsMatch
-          //   }}
-          //   validateOn="change"
+            validators={{
+              passwordsMatch: this.checkPasswordsMatch
+            }}
+            validateOn="change"
           />
-        {/* <Errors
+        <Errors
             style={errorStyles}
             className="errors"
-            model="register.passwordConfirm"
+            model="forms.register.passwordConfirm"
             show="touched"
             messages={{
               passwordsMatch: 'Passwords do not match'
             }}
-          /> */}
+          />
         <br />
         <button type="submit">register</button>
       </Form>
