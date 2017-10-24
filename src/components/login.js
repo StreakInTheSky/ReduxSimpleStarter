@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Control, Form, actions } from 'react-redux-form'
 
 export default class Login extends React.Component {
@@ -18,8 +18,8 @@ export default class Login extends React.Component {
           <button type="submit">login</button>
         </Form>
         <div>
-          <Link to={'/registration/'}>
-              Register new account
+          <Link to={'/signup/'}>
+            Sign up with new account
           </Link>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -14,7 +15,7 @@ export default class Header extends React.Component {
         <h1>Curator-Rater</h1>
         {/* <MainNav /> */}
         {/* <ProfileMenu /> */}
-        <span className="mock-button" >login</span>
+        <Link to="/login"><span className="mock-button" >login</span></Link>
       </header>
     )
   }
