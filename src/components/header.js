@@ -15,7 +15,7 @@ export default class Header extends React.Component {
         <h1>Curator-Rater</h1>
         {/* <MainNav /> */}
         {/* <ProfileMenu /> */}
-        <Link to="/login"><span className="mock-button" >login</span></Link>
+        <Link to="/login" className="mock-button">login</Link>
       </header>
     )
   }
