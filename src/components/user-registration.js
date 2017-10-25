@@ -28,8 +28,7 @@ export class UserRegistration extends React.Component {
 
 
   registerUser(values){
-    // this.props.dispatch(actions.createUser(values))
-    console.log(values)
+    this.props.dispatch(actions.createUser(values))
   }
 
   render() {

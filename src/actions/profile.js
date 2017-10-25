@@ -18,3 +18,21 @@ export const fetchUserInfo = (username) => dispatch => {
     .then(({data}) => dispatch(fetchUserInfoSuccess(data)))
     .catch(error => dispatch(fetchUserInfoError(error)))
 }
+
+export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS';
+export const createUserSuccess = (data) => ({
+    type: CREATE_USER_SUCCESS,
+    payload: data
+});
+
+export const CREATE_USER_ERROR= 'CREATE_USER_ERROR';
+export const createUserError = (error) => ({
+    type: CREATE_USER_ERROR,
+    payload: error
+});
+export const createUser = (data) => dispatch => {
+  const url = 'http://localhost:3000/api/user/';
+  axios.post(url, data)
+    .then(res => dispatch(createUserSuccess(res)))
+    .catch(err => dispatch(createUserError(err)))
+}

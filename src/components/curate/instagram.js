@@ -1,5 +1,5 @@
 import React from 'react'
-import { CSSTransitionGroup } from 'react-transition-group'
+import Transition from 'react-transition-group/Transition'
 
 import InstagramImages from './view-instagram-images'
 import * as actions from '../../actions/curate'
@@ -148,14 +148,12 @@ export default class CurateInstagram extends React.Component {
 
         <div className={this.state.showInstagramDropdown ? 'instagram-gallery-container open' : 'instagram-gallery-container' }
           style={styles.galleryContainer}>
-          <CSSTransitionGroup
-            transitionName="instagram-gallery"
-            transitionAppear={true}
-            transitionAppearTimeout={600}
-            transitionEnterTimeout={600}
-            transitionLeaveTimeout={600}>
+          {instagramGallery}
+          {/* <Transition
+            in={this.state.showInstagramDropdown}
+            transitionAppearTimeout={600}>
             {instagramGallery}
-          </CSSTransitionGroup>
+          </Transition> */}
         </div>
       </form>
     )
