@@ -12,7 +12,7 @@ const initialRegistrationState = {
   username: '',
   email: '',
   password: '',
-  passwordConfirm: ''
+  // passwordConfirm: ''
 };
 
 const rootReducer = combineReducers({

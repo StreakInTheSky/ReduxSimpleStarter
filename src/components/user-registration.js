@@ -7,16 +7,28 @@ import * as actions from '../actions/profile';
 export class UserRegistration extends React.Component {
   constructor(props) {
     super(props)
+    // this.state = {
+    //   password: null,
+    //   passwordConfirm: null
+    // }
 
-    this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this)
+    // this.checkPasswordsMatch = this.checkPasswordsMatch.bind(this)
   }
 
-  checkPasswordsMatch() {
-    return this.props.password === this.props.passwordConfirm
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     password: nextProps.password,
+  //     passwordConfirm: nextProps.passwordConfirm
+  //   })
+  // }
+
+  // checkPasswordsMatch(val) {
+  //   return this.state.password === this.state.passwordConfirm
+  // }
+
 
   registerUser(values){
-    this.props.dispatch(actions.createUser(values))
+    // this.props.dispatch(actions.createUser(values))
     console.log(values)
   }
 
@@ -67,7 +79,8 @@ export class UserRegistration extends React.Component {
         <label htmlFor="register-password">password:</label>
         <Control type="password" model="forms.register.password" id="register-password" required
           validators={{
-            minLength: (val) => val.length >= 8
+            minLength: (val) => val.length >= 8,
+            // passwordsMatch: this.checkPasswordsMatch
           }}
           validateOn="change"
           />
@@ -81,7 +94,7 @@ export class UserRegistration extends React.Component {
           }}
           />
         <br />
-        <label htmlFor="register-password-confirm">re-type password:</label>
+        {/* <label htmlFor="register-password-confirm">re-type password:</label>
         <Control type="password" model="forms.register.passwordConfirm" id="register-password-confirm" required
             validators={{
               passwordsMatch: this.checkPasswordsMatch
@@ -97,7 +110,7 @@ export class UserRegistration extends React.Component {
               passwordsMatch: 'Passwords do not match'
             }}
           />
-        <br />
+        <br /> */}
         <button type="submit">register</button>
       </Form>
     );
@@ -106,7 +119,7 @@ export class UserRegistration extends React.Component {
 
 const mapStateToProps = (state, props) => ({
   password: state.forms.register.password,
-  passwordConfirm: state.forms.register.passwordConfirm
+  // passwordConfirm: state.forms.register.passwordConfirm
 });
 
 export default connect(mapStateToProps)(UserRegistration);
